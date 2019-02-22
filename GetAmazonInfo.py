@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import chromedriver_binary
+from time import sleep
 
 # ブラウザのオプションを格納する変数をもらってきます。
 options = Options()
@@ -15,6 +16,8 @@ driver = webdriver.Chrome(options=options)
 
 # ブラウザでアクセスする
 driver.get("https://www.amazon.co.jp/exec/obidos/ASIN/B072L3S8GV")
+
+sleep(1)
 
 # HTMLを文字コードをUTF-8に変換してから取得します。
 html = driver.page_source.encode('utf-8')
@@ -33,3 +36,10 @@ soup = BeautifulSoup(html, "html.parser")
 # for string in soup.select_one("#productDescription").strings:
 #     if string.strip() != '':
 #         print(string.strip())
+
+# 最低価格
+# print(soup.select_one("#priceblock_ourprice").string[2:])
+
+# カテゴリ
+for category in (soup.select_one("#SalesRank .zg_hrsr_ladder")):
+    print(category)
