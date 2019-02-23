@@ -8,6 +8,7 @@ from selenium.webdriver.common.by import By
 import chromedriver_binary
 from time import sleep
 import pandas as pd
+from datetime import datetime
 
 # ブラウザのオプションを格納する変数をもらってきます。
 options = Options()
@@ -34,7 +35,21 @@ options.add_argument('--lang=ja')
 # 画像を読み込まないで軽くする
 options.add_argument('--blink-settings=imagesEnabled=false')
 
-ASIN_list = ['B072L3S8GV', 'B07H7H1WJL']
+# ASINを入力
+ASIN_list = []
+print('Paste ASIN List\nAnd pless "f" key to finish')
+
+while True:
+    input_chr = input()
+    if input_chr == 'f':
+        break
+    else:
+        ASIN_list.append(input_chr)
+
+# 現在時刻取得、計測開始
+start_time = datetime.now()
+print('start', start_time.strftime("%Y/%m/%d %H:%M:%S"))
+
 info = {'商品名': {}, '商品画像': {}, '商品説明(文章)': {}, '商品説明(画像)': {}, '最低価格': {}, 'カテゴリ': {}} 
 
 # ブラウザを起動する
@@ -42,7 +57,7 @@ driver = webdriver.Chrome(chrome_options=options)
 
 # ブラウザでモノレートにアクセスする
 driver.get("https://mnrate.com/")
-
+counter = 0
 for ASIN in ASIN_list:
     sleep(2)
 
@@ -61,8 +76,7 @@ for ASIN in ASIN_list:
     # 検索
     search.click()
 
-    sleep(1)
-    driver.implicitly_wait(20)
+    sleep(2)
 
     # validate
     assert driver.current_url == 'https://mnrate.com/item/aid/{}'.format(ASIN)
@@ -117,15 +131,22 @@ for ASIN in ASIN_list:
     # カテゴリ
     category_tree = ''
     for category in (soup.select("#wayfinding-breadcrumbs_feature_div > ul a")):
-        category_tree += category.string.strip() + '>'
-    info['カテゴリ'][ASIN] = category_tree.rstrip('>')
+        category_tree += category.string.strip() + '/'
+    info['カテゴリ'][ASIN] = category_tree.rstrip('/')
 
     driver.close()
     driver.switch_to.window(handle_array[0])
+    counter += 1
+    print(counter)
 
 driver.quit()
 
 result = pd.DataFrame(info)
+
+# 現在時刻取得、計測終了
+finish_time = datetime.now()
+print('finish', finish_time.strftime("%Y/%m/%d %H:%M:%S"))
+print('time', finish_time - start_time)
 
 fn = input('File name :')
 
