@@ -14,7 +14,7 @@ from datetime import datetime
 options = Options()
 
 # Headlessモードを有効にする（コメントアウトするとブラウザが実際に立ち上がります）
-options.add_argument('--headless')
+# options.add_argument('--headless')
 
 # 暫定的に必要らしい
 options.add_argument('--disable-gpu')
@@ -55,50 +55,14 @@ info = {'商品名': {}, '商品画像': {}, '商品説明(文章)': {}, '商品
 # ブラウザを起動する
 driver = webdriver.Chrome(chrome_options=options)
 
-# ブラウザでモノレートにアクセスする
-driver.get("https://mnrate.com/")
+# ブラウザでAmazonにアクセスする
 counter = 0
 for ASIN in ASIN_list:
+    driver.get("https://www.amazon.co.jp/exec/obidos/ASIN/{}".format(ASIN))
     sleep(2)
-
-    # validate
-    assert 'モノレート' in driver.title 
-
-    # 検索のテキストボックス要素を取得
-    element = driver.find_element_by_id("_item_search_inp")
-
-    # テキストボックスに入力
-    element.send_keys(ASIN)
-
-    # 検索ボタンを取得
-    search = driver.find_element_by_id("_graph_search_btn")
-
-    # 検索
-    search.click()
-
-    sleep(2)
-
-    # validate
-    assert driver.current_url == 'https://mnrate.com/item/aid/{}'.format(ASIN)
-
-    WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.CSS_SELECTOR, "#main_contents > div > ul.out_site_link_list > li:nth-child(1)")))
-    # 商品詳細ボタンを取得
-    link = driver.find_element_by_css_selector("#main_contents > div > ul.out_site_link_list > li:nth-child(1)")
-
-    # 商品詳細ボタンをクリック
-    link.click()
-
-    # ウィンドウハンドルを取得する(list型配列)
-    handle_array = driver.window_handles
-
-    # タブ移動
-    driver.switch_to.window(handle_array[1])
-    driver.implicitly_wait(20)
 
     # validate
     assert 'Amazon' in driver.title
-
-    sleep(2)
 
     # HTMLを文字コードをUTF-8に変換してから取得します。
     html = driver.page_source.encode('utf-8')
@@ -107,35 +71,49 @@ for ASIN in ASIN_list:
     soup = BeautifulSoup(html, "html.parser")
 
     # 商品名
-    info['商品名'][ASIN] = soup.select_one("#productTitle").string.strip()
+    info['商品名'][ASIN] = soup.select_one("#productTitle").string.strip() if soup.select_one("#productTitle") is not None else ''
 
     # 商品画像(1枚)
-    info['商品画像'][ASIN] = soup.select_one(".a-spacing-small.item.imageThumbnail.a-declarative img")['src'].replace('_SS40_.', '')
+    info['商品画像'][ASIN] = soup.select_one(".a-spacing-small.item.imageThumbnail.a-declarative img")['src'].replace('_SS40_.', '') if soup.select_one(".a-spacing-small.item.imageThumbnail.a-declarative img") is not None else ''
 
     # 商品説明(文章)
     description = ''
-    for string in soup.select_one("#productDescription").stripped_strings:
-        if string != '' and '#productDescription' not in string: # 空白行とstyleタグの中身をfiltering
-            description += string
-    info['商品説明(文章)'][ASIN] = description
+    if soup.select_one("#productDescription") is not None:
+        for string in soup.select_one("#productDescription").stripped_strings:
+            if string != '' and '#productDescription' not in string: # 空白行とstyleタグの中身をfiltering
+                description += string
+        info['商品説明(文章)'][ASIN] = description
+    else:
+        info['商品説明(文章)'][ASIN] = ''
 
     # 商品説明(画像)
     images =  []
-    for img in soup.select("#productDescription img"):
-        images.append(img['src'])
-    info['商品説明(画像)'][ASIN]= images
+    if soup.select("#productDescription img") is not None:
+        for img in soup.select("#productDescription img"):
+            images.append(img['src'])
+        info['商品説明(画像)'][ASIN]= images
+    else:
+        info['商品説明(画像)'][ASIN]= ''
 
     # 最低価格
-    info['最低価格'][ASIN] = soup.select_one("#priceblock_ourprice").string
+    if soup.select_one("#priceblock_ourprice") is not None:
+        info['最低価格'][ASIN] = soup.select_one("#priceblock_ourprice").string
+    elif soup.select_one("#priceblock_dealprice") is not None:
+        info['最低価格'][ASIN] = soup.select_one("#priceblock_dealprice").string
+    else:
+        info['最低価格'][ASIN] = ''
 
     # カテゴリ
     category_tree = ''
-    for category in (soup.select("#wayfinding-breadcrumbs_feature_div > ul a")):
-        category_tree += category.string.strip() + '/'
-    info['カテゴリ'][ASIN] = category_tree.rstrip('/')
+    if soup.select("#wayfinding-breadcrumbs_feature_div > ul a") is not None:
+        for category in (soup.select("#wayfinding-breadcrumbs_feature_div > ul a")):
+            category_tree += category.string.strip() + '/'
+        info['カテゴリ'][ASIN] = category_tree.rstrip('/')
+    else:
+        info['カテゴリ'][ASIN] = ''
 
-    driver.close()
-    driver.switch_to.window(handle_array[0])
+    # driver.close()
+    # driver.switch_to.window(handle_array[0])
     counter += 1
     print(counter)
 
