@@ -14,7 +14,7 @@ from datetime import datetime
 options = Options()
 
 # Headlessモードを有効にする（コメントアウトするとブラウザが実際に立ち上がります）
-# options.add_argument('--headless')
+options.add_argument('--headless')
 
 # 暫定的に必要らしい
 options.add_argument('--disable-gpu')
@@ -50,7 +50,10 @@ while True:
 start_time = datetime.now()
 print('start', start_time.strftime("%Y/%m/%d %H:%M:%S"))
 
-info = {'商品名': {}, '商品画像': {}, '商品説明(文章)': {}, '商品説明(画像)': {}, '最低価格': {}, 'カテゴリ': {}} 
+info = {'商品名': {}, '商品画像': {}, '商品説明(文章)': {}, '商品説明(画像)': {}, '最低価格': {}, 'Amazonカテゴリ': {}, 'ヤフオクカテゴリ': {}} 
+
+# カテゴリのリストを開く
+category_list = pd.read_csv('ChangeCategory.csv')
 
 # ブラウザを起動する
 driver = webdriver.Chrome(chrome_options=options)
@@ -103,17 +106,25 @@ for ASIN in ASIN_list:
     else:
         info['最低価格'][ASIN] = ''
 
-    # カテゴリ
+    # Amazonカテゴリ
     category_tree = ''
     if soup.select("#wayfinding-breadcrumbs_feature_div > ul a") is not None:
         for category in (soup.select("#wayfinding-breadcrumbs_feature_div > ul a")):
             category_tree += category.string.strip() + '/'
-        info['カテゴリ'][ASIN] = category_tree.rstrip('/')
+        a_category = category_tree.rstrip('/')
     else:
-        info['カテゴリ'][ASIN] = ''
+        a_category = ''
+    info['Amazonカテゴリ'][ASIN] = a_category
+    
+    # ヤフオクカテゴリ
+    if a_category == '':
+        y_category = ''
+    else:
+        y_category = category_list[category_list['Amazonカテゴリ名'] == a_category]['ヤフオクカテゴリ名'].values[0]
+    info['ヤフオクカテゴリ'][ASIN] = y_category
 
-    # driver.close()
-    # driver.switch_to.window(handle_array[0])
+
+
     counter += 1
     print(counter)
 
