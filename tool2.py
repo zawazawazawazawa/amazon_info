@@ -84,7 +84,7 @@ for ASIN in ASIN_list:
     if soup.select_one("#productDescription") is not None:
         for string in soup.select_one("#productDescription").stripped_strings:
             if string != '' and '#productDescription' not in string: # 空白行とstyleタグの中身をfiltering
-                description += string
+                description += string.strip()
         info['商品説明(文章)'][ASIN] = description
     else:
         info['商品説明(文章)'][ASIN] = ''
