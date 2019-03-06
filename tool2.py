@@ -50,7 +50,7 @@ while True:
 start_time = datetime.now()
 print('start', start_time.strftime("%Y/%m/%d %H:%M:%S"))
 
-info = {'商品名': {}, '商品画像': {}, '商品説明(文章)': {}, '商品説明(画像)': {}, '最低価格': {}, 'Amazonカテゴリ': {}, 'ヤフオクカテゴリ': {}} 
+info = {'ASIN': {},'商品名': {}, '商品画像': {}, '商品説明(文章)': {}, '商品説明(画像)': {}, '最低価格': {}, 'Amazonカテゴリ': {}, 'ヤフオクカテゴリ': {}} 
 
 # カテゴリのリストを開く
 category_list = pd.read_csv('ChangeCategory.csv')
@@ -73,6 +73,9 @@ for ASIN in ASIN_list:
     # BeautifulSoupで扱えるようにパースします
     soup = BeautifulSoup(html, "html.parser")
 
+    # ASIN
+    info['ASIN'] = ASIN
+
     # 商品名
     info['商品名'][ASIN] = soup.select_one("#productTitle").string.strip() if soup.select_one("#productTitle") is not None else ''
 
@@ -84,7 +87,7 @@ for ASIN in ASIN_list:
     if soup.select_one("#productDescription") is not None:
         for string in soup.select_one("#productDescription").stripped_strings:
             if string != '' and '#productDescription' not in string: # 空白行とstyleタグの中身をfiltering
-                description += string.strip()
+                description += string.replace(' ', '')
         info['商品説明(文章)'][ASIN] = description
     else:
         info['商品説明(文章)'][ASIN] = ''
@@ -100,11 +103,11 @@ for ASIN in ASIN_list:
 
     # 最低価格
     if soup.select_one("#priceblock_ourprice") is not None:
-        info['最低価格'][ASIN] = soup.select_one("#priceblock_ourprice").string
+        info['最低価格'][ASIN] = soup.select_one("#priceblock_ourprice").string.strip('￥ ,').replace(',', '') if '-' not in soup.select_one("#priceblock_ourprice").string else '999999999'
     elif soup.select_one("#priceblock_dealprice") is not None:
-        info['最低価格'][ASIN] = soup.select_one("#priceblock_dealprice").string
+        info['最低価格'][ASIN] = soup.select_one("#priceblock_dealprice").string.strip('￥ ,').replace(',', '') if '-' not in soup.select_one("#priceblock_dealprice").string else '999999999'
     else:
-        info['最低価格'][ASIN] = ''
+        info['最低価格'][ASIN] = '999999999'
 
     # Amazonカテゴリ
     category_tree = ''
@@ -120,7 +123,7 @@ for ASIN in ASIN_list:
     if a_category == '':
         y_category = ''
     else:
-        y_category = category_list[category_list['Amazonカテゴリ名'] == a_category]['ヤフオクカテゴリ名'].values[0]
+        y_category = category_list[category_list['Amazonカテゴリ名'] == a_category]['ヤフオクカテゴリID'].values[0]
     info['ヤフオクカテゴリ'][ASIN] = y_category
 
 
