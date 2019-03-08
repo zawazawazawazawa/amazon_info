@@ -11,6 +11,7 @@ import chromedriver_binary
 from time import sleep
 import pandas as pd
 from datetime import datetime
+import re
 
 # ブラウザのオプションを格納する変数をもらってきます。
 options = Options()
@@ -55,7 +56,7 @@ print('start', start_time.strftime("%Y/%m/%d %H:%M:%S"))
 info = {'ASIN': {},'商品名': {}, '商品画像': {}, '商品説明(文章)': {}, '商品説明(画像)': {}, '最低価格': {}, 'Amazonカテゴリ': {}, 'ヤフオクカテゴリ': {}} 
 
 # カテゴリのリストを開く
-category_list = pd.read_csv(b'ChangeCategory.csv')
+category_list = pd.read_csv('ChangeCategory.csv')
 
 # ブラウザを起動する
 driver = webdriver.Chrome(chrome_options=options)
@@ -82,7 +83,8 @@ for ASIN in ASIN_list:
     info['商品名'][ASIN] = soup.select_one("#productTitle").string.strip() if soup.select_one("#productTitle") is not None else ''
 
     # 商品画像(1枚)
-    info['商品画像'][ASIN] = soup.select_one(".a-spacing-small.item.imageThumbnail.a-declarative img")['src'].replace('_SS40_.', '') if soup.select_one(".a-spacing-small.item.imageThumbnail.a-declarative img") is not None else ''
+    image_url = soup.select_one(".a-spacing-small.item.imageThumbnail.a-declarative img")['src'] if soup.select_one(".a-spacing-small.item.imageThumbnail.a-declarative img") is not None else ''
+    info['商品画像'][ASIN] = re.sub('\._[a-zA-Z0-9_,]*_\.', '.', image_url)
 
     # 商品説明(文章)
     description = ''

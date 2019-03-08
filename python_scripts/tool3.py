@@ -1,5 +1,9 @@
 import pandas as pd
 import copy
+import requests
+import os
+import zipfile
+import shutil
 
 def description(title, description):
     description = ('<center>'
@@ -250,29 +254,44 @@ templete = {
     '出品者情報開示前チェック': 'いいえ' #はいORいいえ
 }
 
+#ディレクトリの初期化
+if os.path.isdir('upload_files'):
+    shutil.rmtree('upload_files')
+os.mkdir('upload_files')
+
+# csvファイル名を入力
+csv_file = input('Input csv file name: ') + '.csv'
+
 # amazonの商品情報リストを開く
-amazon_list = pd.read_csv('a.csv')
+amazon_list = pd.read_csv(csv_file)
 
 # 出力用の辞書を用意
 result = []
 
 for n in range(len(amazon_list.index)):
+    # 画像を取得
+    r = requests.get(amazon_list.loc[n]['商品画像'])
+    with open('upload_files/{}.jpg'.format(n), 'wb') as f: #数字.jpgで保存
+        f.write(r.content)
+
     new_templete = copy.deepcopy(templete)
     new_templete['カテゴリ'] = amazon_list.loc[n]['ヤフオクカテゴリ']
     new_templete['タイトル'] = amazon_list.loc[n]['商品名'][:63]
-    new_templete['説明'] = description(amazon_list.loc[n]['商品名'][:63], amazon_list.loc[n]['商品説明(文章)'])
+    new_templete['説明'] = description(amazon_list.loc[n]['商品名'], amazon_list.loc[n]['商品説明(文章)'])
     new_templete['開始価格'] = amazon_list.loc[n]['最低価格']
     new_templete['即決価格'] = amazon_list.loc[n]['最低価格']
-    # new_templete['画像1'] = amazon_list.loc[n]['商品画像']
-    new_templete['画像1'] = 'case.jpg'
+    new_templete['画像1'] = '{}.jpg'.format(n)
+    
 
     result.append(new_templete)
                                                 
 df = pd.DataFrame(result)
 
-fn = input('File name :')
-
 # CSV ファイルとして出力
-df.to_csv("{}.csv".format(fn))
+df.to_csv("upload_files/data.csv")
+
+fn = input('zip file name :')
+
+shutil.make_archive(fn, 'zip', 'upload_files')
 
 print('Finish!')
