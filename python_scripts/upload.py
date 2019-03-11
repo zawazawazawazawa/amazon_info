@@ -9,6 +9,9 @@ import chromedriver_binary
 from time import sleep
 import os
 
+from selenium import webdriver
+from multiprocessing import Pool
+
 # ブラウザのオプションを格納する変数をもらってきます。
 options = Options()
 
@@ -34,49 +37,60 @@ options.add_argument('--lang=ja')
 # 画像を読み込まないで軽くする
 options.add_argument('--blink-settings=imagesEnabled=false')
 
-# ユーザー名とパスワードとzipファイル名をターミナルに入力
-username = input('Username?: ')
-password = input('Password?: ')
-fn = input('Filename?: ')
+def driver(url):
+    driver = webdriver.Chrome(chrome_options=options)
+    driver.get(url)
+    # driver.close()
 
-# ブラウザを起動する
-driver = webdriver.Chrome(chrome_options=options)
+p = Pool(10)
+p.map(driver, [
+    "http://auctown.jp/",
+    "http://auctown.jp/"
+])
 
-driver.get('http://auctown.jp/')
-sleep(2)
+# # ユーザー名とパスワードとzipファイル名をターミナルに入力
+# username = input('Username?: ')
+# password = input('Password?: ')
+# fn = input('Filename?: ')
 
-# ログインボタンをクリック
-driver.find_element_by_css_selector('#header > div.topmenu > a').click()
-sleep(2)
+# # ブラウザを起動する
+# driver = webdriver.Chrome(chrome_options=options)
 
-# ユーザー名を入力
-driver.find_element_by_id('username').send_keys(username)
-driver.find_element_by_id('btnNext').click()
-sleep(2)
+# driver.get('http://auctown.jp/')
+# sleep(2)
 
-# passwordを入力
-driver.find_element_by_id('passwd').send_keys(password)
-driver.find_element_by_id('btnSubmit').click()
-sleep(2)
+# # ログインボタンをクリック
+# driver.find_element_by_css_selector('#header > div.topmenu > a').click()
+# sleep(2)
 
-# 一括商品登録へ
-driver.get('https://auctown.jp/bulkUploadStep1/')
-sleep(2)
+# # ユーザー名を入力
+# driver.find_element_by_id('username').send_keys(username)
+# driver.find_element_by_id('btnNext').click()
+# sleep(2)
 
-# ファイルをアップロード
-driver.find_element_by_css_selector('#zipFrm > table > tbody > tr > td > input[type="file"]').send_keys(os.path.abspath('{}.zip'.format(fn)))
-driver.find_element_by_id('zipSend').click()
-sleep(2)
+# # passwordを入力
+# driver.find_element_by_id('passwd').send_keys(password)
+# driver.find_element_by_id('btnSubmit').click()
+# sleep(2)
 
-# いますぐアップロード
-driver.find_element_by_id('bulkNowSubmit').click()
-sleep(2)
-Alert(driver).accept()
+# # 一括商品登録へ
+# driver.get('https://auctown.jp/bulkUploadStep1/')
+# sleep(2)
 
-# HTMLを文字コードをUTF-8に変換してから取得します。
-html = driver.page_source.encode('utf-8')
+# # ファイルをアップロード
+# driver.find_element_by_css_selector('#zipFrm > table > tbody > tr > td > input[type="file"]').send_keys(os.path.abspath('{}.zip'.format(fn)))
+# driver.find_element_by_id('zipSend').click()
+# sleep(2)
 
-# BeautifulSoupで扱えるようにパースします
-soup = BeautifulSoup(html, "html.parser")
+# # いますぐアップロード
+# driver.find_element_by_id('bulkNowSubmit').click()
+# sleep(2)
+# Alert(driver).accept()
 
-# driver.quit()
+# # HTMLを文字コードをUTF-8に変換してから取得します。
+# html = driver.page_source.encode('utf-8')
+
+# # BeautifulSoupで扱えるようにパースします
+# soup = BeautifulSoup(html, "html.parser")
+
+# # driver.quit()

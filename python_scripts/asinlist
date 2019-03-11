@@ -18,7 +18,7 @@ https://www.amazon.co.jp/SWANS-%E3%82%B9%E3%83%AF%E3%83%B3%E3%82%BA-H-45R-%E5%AD
 https://www.amazon.co.jp/exec/obidos/ASIN/B000C1V6GE
 https://www.amazon.co.jp/exec/obidos/ASIN/B07GXHKQ24
 
- if '-' not in str(soup.select_one("#priceblock_ourprice").string) else '999999999'
+ 
 
 
 
