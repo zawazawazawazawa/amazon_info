@@ -12,6 +12,7 @@ from time import sleep
 import pandas as pd
 from datetime import datetime
 import re
+import os
 
 # ブラウザのオプションを格納する変数をもらってきます。
 options = Options()
@@ -56,7 +57,7 @@ print('start', start_time.strftime("%Y/%m/%d %H:%M:%S"))
 info = {'ASIN': {},'商品名': {}, '商品画像': {}, '商品説明(文章)': {}, '商品説明(画像)': {}, '最低価格': {}, 'Amazonカテゴリ': {}, 'ヤフオクカテゴリ': {}} 
 
 # カテゴリのリストを開く
-category_list = pd.read_csv('ChangeCategory.csv')
+category_list = pd.read_csv('python_scripts/category_list.csv')
 
 # ブラウザを起動する
 driver = webdriver.Chrome(chrome_options=options)

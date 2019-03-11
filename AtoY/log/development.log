@@ -1,0 +1,494 @@
+Started GET "/" for 127.0.0.1 at 2019-03-09 17:39:40 +0900
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Library/Ruby/Gems/2.3.0/gems/railties-5.2.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Library/Ruby/Gems/2.3.0/gems/railties-5.2.2/lib/rails/templates/rails/welcome/index.html.erb (4.4ms)
+Completed 200 OK in 41ms (Views: 12.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/home" for 127.0.0.1 at 2019-03-09 17:48:13 +0900
+  
+ActionController::RoutingError (uninitialized constant ToolsController):
+  
+bootsnap (1.4.1) lib/bootsnap/load_path_cache/core_ext/active_support.rb:76:in `block in load_missing_constant'
+bootsnap (1.4.1) lib/bootsnap/load_path_cache/core_ext/active_support.rb:8:in `without_bootsnap_cache'
+bootsnap (1.4.1) lib/bootsnap/load_path_cache/core_ext/active_support.rb:76:in `rescue in load_missing_constant'
+bootsnap (1.4.1) lib/bootsnap/load_path_cache/core_ext/active_support.rb:58:in `load_missing_constant'
+activesupport (5.2.2) lib/active_support/inflector/methods.rb:283:in `const_get'
+activesupport (5.2.2) lib/active_support/inflector/methods.rb:283:in `block in constantize'
+activesupport (5.2.2) lib/active_support/inflector/methods.rb:281:in `each'
+activesupport (5.2.2) lib/active_support/inflector/methods.rb:281:in `inject'
+activesupport (5.2.2) lib/active_support/inflector/methods.rb:281:in `constantize'
+actionpack (5.2.2) lib/action_dispatch/http/request.rb:88:in `controller_class_for'
+actionpack (5.2.2) lib/action_dispatch/http/request.rb:81:in `controller_class'
+actionpack (5.2.2) lib/action_dispatch/routing/route_set.rb:46:in `controller'
+actionpack (5.2.2) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (5.2.2) lib/action_dispatch/journey/router.rb:52:in `block in serve'
+actionpack (5.2.2) lib/action_dispatch/journey/router.rb:35:in `each'
+actionpack (5.2.2) lib/action_dispatch/journey/router.rb:35:in `serve'
+actionpack (5.2.2) lib/action_dispatch/routing/route_set.rb:840:in `call'
+rack (2.0.6) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.0.6) lib/rack/etag.rb:25:in `call'
+rack (2.0.6) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.6) lib/rack/head.rb:12:in `call'
+actionpack (5.2.2) lib/action_dispatch/http/content_security_policy.rb:18:in `call'
+rack (2.0.6) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.6) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/cookies.rb:670:in `call'
+activerecord (5.2.2) lib/active_record/migration.rb:559:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+activesupport (5.2.2) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (5.2.2) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/debug_exceptions.rb:61:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.2) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.2) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.6) lib/rack/method_override.rb:22:in `call'
+rack (2.0.6) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.6) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.2) lib/rails/engine.rb:524:in `call'
+puma (3.12.0) lib/puma/configuration.rb:225:in `call'
+puma (3.12.0) lib/puma/server.rb:658:in `handle_request'
+puma (3.12.0) lib/puma/server.rb:472:in `process_client'
+puma (3.12.0) lib/puma/server.rb:332:in `block in run'
+puma (3.12.0) lib/puma/thread_pool.rb:133:in `block in spawn_thread'
+Started GET "/home" for 127.0.0.1 at 2019-03-09 17:49:34 +0900
+Processing by ToolsController#home as HTML
+Completed 406 Not Acceptable in 93ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionController::UnknownFormat (ToolsController#home is missing a template for this request format and variant.
+
+request.formats: ["text/html"]
+request.variant: []
+
+NOTE! For XHR/Ajax or API requests, this action would normally respond with 204 No Content: an empty white screen. Since you're loading it in a web browser, we assume that you expected to actually render a template, not nothing, so we're showing an error to be extra-clear. If you expect 204 No Content, carry on. That's what you'll get from an XHR or API request. Give it a shot.):
+  
+actionpack (5.2.2) lib/action_controller/metal/implicit_render.rb:55:in `default_render'
+actionpack (5.2.2) lib/action_controller/metal/basic_implicit_render.rb:6:in `block in send_action'
+actionpack (5.2.2) lib/action_controller/metal/basic_implicit_render.rb:6:in `tap'
+actionpack (5.2.2) lib/action_controller/metal/basic_implicit_render.rb:6:in `send_action'
+actionpack (5.2.2) lib/abstract_controller/base.rb:194:in `process_action'
+actionpack (5.2.2) lib/action_controller/metal/rendering.rb:30:in `process_action'
+actionpack (5.2.2) lib/abstract_controller/callbacks.rb:42:in `block in process_action'
+activesupport (5.2.2) lib/active_support/callbacks.rb:132:in `run_callbacks'
+actionpack (5.2.2) lib/abstract_controller/callbacks.rb:41:in `process_action'
+actionpack (5.2.2) lib/action_controller/metal/rescue.rb:22:in `process_action'
+actionpack (5.2.2) lib/action_controller/metal/instrumentation.rb:34:in `block in process_action'
+activesupport (5.2.2) lib/active_support/notifications.rb:168:in `block in instrument'
+activesupport (5.2.2) lib/active_support/notifications/instrumenter.rb:23:in `instrument'
+activesupport (5.2.2) lib/active_support/notifications.rb:168:in `instrument'
+actionpack (5.2.2) lib/action_controller/metal/instrumentation.rb:32:in `process_action'
+actionpack (5.2.2) lib/action_controller/metal/params_wrapper.rb:256:in `process_action'
+activerecord (5.2.2) lib/active_record/railties/controller_runtime.rb:24:in `process_action'
+actionpack (5.2.2) lib/abstract_controller/base.rb:134:in `process'
+actionview (5.2.2) lib/action_view/rendering.rb:32:in `process'
+actionpack (5.2.2) lib/action_controller/metal.rb:191:in `dispatch'
+actionpack (5.2.2) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (5.2.2) lib/action_dispatch/routing/route_set.rb:52:in `dispatch'
+actionpack (5.2.2) lib/action_dispatch/routing/route_set.rb:34:in `serve'
+actionpack (5.2.2) lib/action_dispatch/journey/router.rb:52:in `block in serve'
+actionpack (5.2.2) lib/action_dispatch/journey/router.rb:35:in `each'
+actionpack (5.2.2) lib/action_dispatch/journey/router.rb:35:in `serve'
+actionpack (5.2.2) lib/action_dispatch/routing/route_set.rb:840:in `call'
+rack (2.0.6) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.0.6) lib/rack/etag.rb:25:in `call'
+rack (2.0.6) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.6) lib/rack/head.rb:12:in `call'
+actionpack (5.2.2) lib/action_dispatch/http/content_security_policy.rb:18:in `call'
+rack (2.0.6) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.6) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/cookies.rb:670:in `call'
+activerecord (5.2.2) lib/active_record/migration.rb:559:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+activesupport (5.2.2) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (5.2.2) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/debug_exceptions.rb:61:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.2) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.2) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.6) lib/rack/method_override.rb:22:in `call'
+rack (2.0.6) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.6) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.2) lib/rails/engine.rb:524:in `call'
+puma (3.12.0) lib/puma/configuration.rb:225:in `call'
+puma (3.12.0) lib/puma/server.rb:658:in `handle_request'
+puma (3.12.0) lib/puma/server.rb:472:in `process_client'
+puma (3.12.0) lib/puma/server.rb:332:in `block in run'
+puma (3.12.0) lib/puma/thread_pool.rb:133:in `block in spawn_thread'
+Started GET "/home" for 127.0.0.1 at 2019-03-09 17:50:26 +0900
+Processing by ToolsController#home as HTML
+  Rendering tools/home.html.erb within layouts/application
+  Rendered tools/home.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 678ms (Views: 675.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/home" for 127.0.0.1 at 2019-03-09 17:50:36 +0900
+Processing by ToolsController#home as HTML
+  Rendering tools/home.html.erb within layouts/application
+  Rendered tools/home.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 24ms (Views: 20.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/home" for 127.0.0.1 at 2019-03-09 18:20:38 +0900
+Processing by ToolsController#home as HTML
+  Rendering tools/home.html.erb within layouts/application
+  Rendered tools/home.html.erb within layouts/application (194.7ms)
+Completed 500 Internal Server Error in 229ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `some_path' for #<#<Class:0x00007fb1cd3d3a20>:0x00007fb1cd3c23d8>
+Did you mean?  home_path):
+    1: <h1>home</h1>
+    2: 
+    3: <%= link_to "ASINリストの作成", some_path %> 
+  
+app/views/tools/home.html.erb:3:in `_app_views_tools_home_html_erb__4409617089825920210_70200814610280'
+Started GET "/home" for 127.0.0.1 at 2019-03-09 18:20:52 +0900
+Processing by ToolsController#home as HTML
+  Rendering tools/home.html.erb within layouts/application
+  Rendered tools/home.html.erb within layouts/application (1.0ms)
+Completed 500 Internal Server Error in 10ms (ActiveRecord: 0.0ms)
+
+
+  
+SyntaxError (/Users/shinichiro/Products/amazon_info/AtoY/app/views/tools/home.html.erb:5: syntax error, unexpected keyword_ensure, expecting ')'
+/Users/shinichiro/Products/amazon_info/AtoY/app/views/tools/home.html.erb:7: syntax error, unexpected keyword_end, expecting ')'):
+  
+app/views/tools/home.html.erb:5: syntax error, unexpected keyword_ensure, expecting ')'
+app/views/tools/home.html.erb:7: syntax error, unexpected keyword_end, expecting ')'
+Started GET "/home" for 127.0.0.1 at 2019-03-09 18:21:31 +0900
+Processing by ToolsController#home as HTML
+  Rendering tools/home.html.erb within layouts/application
+  Rendered tools/home.html.erb within layouts/application (158.0ms)
+Completed 500 Internal Server Error in 166ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `home' for #<#<Class:0x00007fb1cd3d3a20>:0x00007fb1cd620a30>):
+    1: <h1>home</h1>
+    2: 
+    3: <%= link_to "ASINリストの作成",  home %> 
+  
+app/views/tools/home.html.erb:3:in `_app_views_tools_home_html_erb__4409617089825920210_70200815847920'
+Started GET "/home" for 127.0.0.1 at 2019-03-09 18:22:04 +0900
+Processing by ToolsController#home as HTML
+  Rendering tools/home.html.erb within layouts/application
+  Rendered tools/home.html.erb within layouts/application (0.5ms)
+Completed 200 OK in 186ms (Views: 182.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/home" for 127.0.0.1 at 2019-03-09 18:22:56 +0900
+Processing by ToolsController#home as HTML
+  Rendering tools/home.html.erb within layouts/application
+  Rendered tools/home.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 23ms (Views: 19.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/login" for 127.0.0.1 at 2019-03-09 18:24:58 +0900
+Processing by ToolsController#login as HTML
+  Rendering tools/login.html.erb within layouts/application
+  Rendered tools/login.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 24ms (Views: 21.8ms | ActiveRecord: 0.0ms)
+
+
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ bin/rails:9
+  [1m[35m (3.5ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  ↳ bin/rails:9
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to DeviseCreateUsers (20190309094525)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  ↳ db/migrate/20190309094525_devise_create_users.rb:5
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  ↳ db/migrate/20190309094525_devise_create_users.rb:39
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  ↳ db/migrate/20190309094525_devise_create_users.rb:40
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20190309094525"]]
+  ↳ bin/rails:9
+  [1m[35m (1.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Create (0.8ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2019-03-09 09:48:47.338230"], ["updated_at", "2019-03-09 09:48:47.338230"]]
+  ↳ bin/rails:9
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Started GET "/" for 127.0.0.1 at 2019-03-11 19:23:30 +0900
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Library/Ruby/Gems/2.3.0/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+Processing by ToolsController#home as HTML
+  Rendering tools/home.html.erb within layouts/application
+  Rendered tools/home.html.erb within layouts/application (2.9ms)
+Completed 200 OK in 276ms (Views: 243.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/user/sign_in" for 127.0.0.1 at 2019-03-11 19:24:56 +0900
+  
+ActionController::RoutingError (No route matches [GET] "/user/sign_in"):
+  
+actionpack (5.2.2) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.2) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.2) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.6) lib/rack/method_override.rb:22:in `call'
+rack (2.0.6) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.6) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.2) lib/rails/engine.rb:524:in `call'
+puma (3.12.0) lib/puma/configuration.rb:225:in `call'
+puma (3.12.0) lib/puma/server.rb:658:in `handle_request'
+puma (3.12.0) lib/puma/server.rb:472:in `process_client'
+puma (3.12.0) lib/puma/server.rb:332:in `block in run'
+puma (3.12.0) lib/puma/thread_pool.rb:133:in `block in spawn_thread'
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-03-11 19:25:08 +0900
+Processing by Users::SessionsController#new as HTML
+  Rendering users/sessions/new.html.erb within layouts/application
+  Rendered users/shared/_links.html.erb (3.2ms)
+  Rendered users/sessions/new.html.erb within layouts/application (307.8ms)
+Completed 200 OK in 362ms (Views: 341.5ms | ActiveRecord: 0.7ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2019-03-11 19:27:09 +0900
+Processing by Users::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"NA+yyf4E/f595LfcHkmzJoPTY77n239MROOE8Ozwn6xO9SFDhEBAeREFOuX6/Q2kGiTlPAVaOYWHqCxm3w9Blg==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"<span class=\"translation_missing\" title=\"translation missing: ja.users.sessions.new.sign_in\">Sign In</span>"}
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms)
+
+
+Processing by Users::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"NA+yyf4E/f595LfcHkmzJoPTY77n239MROOE8Ozwn6xO9SFDhEBAeREFOuX6/Q2kGiTlPAVaOYWHqCxm3w9Blg==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"<span class=\"translation_missing\" title=\"translation missing: ja.users.sessions.new.sign_in\">Sign In</span>"}
+  Rendering users/sessions/new.html.erb within layouts/application
+  Rendered users/shared/_links.html.erb (2.5ms)
+  Rendered users/sessions/new.html.erb within layouts/application (9.5ms)
+Completed 200 OK in 52ms (Views: 50.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2019-03-11 19:27:11 +0900
+Processing by Users::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"8jFeZ6B4yJ1rb7gNSIyFUkCHxi42mOQpz/oAHHuFB2GIy83t2jx1GgeONTSsODvQ2XBArNQZouAMsaiKSHrZWw==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"<span class=\"translation_missing\" title=\"translation missing: ja.users.sessions.new.sign_in\">Sign In</span>"}
+Completed 401 Unauthorized in 3ms (ActiveRecord: 0.0ms)
+
+
+Processing by Users::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"8jFeZ6B4yJ1rb7gNSIyFUkCHxi42mOQpz/oAHHuFB2GIy83t2jx1GgeONTSsODvQ2XBArNQZouAMsaiKSHrZWw==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"<span class=\"translation_missing\" title=\"translation missing: ja.users.sessions.new.sign_in\">Sign In</span>"}
+  Rendering users/sessions/new.html.erb within layouts/application
+  Rendered users/shared/_links.html.erb (2.8ms)
+  Rendered users/sessions/new.html.erb within layouts/application (8.4ms)
+Completed 200 OK in 45ms (Views: 43.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2019-03-11 19:27:12 +0900
+Processing by Users::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"QCBzQYh6xJK9Qts+8ydclMWg/bL0tZ8ZK2QnwGt54yo62uDL8j55FdGjVgcXk+IWXFd7MBY02dDoL49WWIY9EA==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"<span class=\"translation_missing\" title=\"translation missing: ja.users.sessions.new.sign_in\">Sign In</span>"}
+Completed 401 Unauthorized in 2ms (ActiveRecord: 0.0ms)
+
+
+Processing by Users::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"QCBzQYh6xJK9Qts+8ydclMWg/bL0tZ8ZK2QnwGt54yo62uDL8j55FdGjVgcXk+IWXFd7MBY02dDoL49WWIY9EA==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"<span class=\"translation_missing\" title=\"translation missing: ja.users.sessions.new.sign_in\">Sign In</span>"}
+  Rendering users/sessions/new.html.erb within layouts/application
+  Rendered users/shared/_links.html.erb (1.7ms)
+  Rendered users/sessions/new.html.erb within layouts/application (7.7ms)
+Completed 200 OK in 43ms (Views: 42.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2019-03-11 19:27:12 +0900
+Processing by Users::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"UibH0NfrX8NJleqMVMnsAJNmwbJOJNITdpFri1IhQaAo3FRara/iRCV0Z7WwfVKCCpFHMKyllNq12sMdYd6fmg==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"<span class=\"translation_missing\" title=\"translation missing: ja.users.sessions.new.sign_in\">Sign In</span>"}
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms)
+
+
+Processing by Users::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"UibH0NfrX8NJleqMVMnsAJNmwbJOJNITdpFri1IhQaAo3FRara/iRCV0Z7WwfVKCCpFHMKyllNq12sMdYd6fmg==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"<span class=\"translation_missing\" title=\"translation missing: ja.users.sessions.new.sign_in\">Sign In</span>"}
+  Rendering users/sessions/new.html.erb within layouts/application
+  Rendered users/shared/_links.html.erb (2.3ms)
+  Rendered users/sessions/new.html.erb within layouts/application (9.7ms)
+Completed 200 OK in 41ms (Views: 39.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-03-11 19:31:12 +0900
+Processing by Users::SessionsController#new as HTML
+  Rendering users/sessions/new.html.erb within layouts/application
+  Rendered users/shared/_links.html.erb (1.3ms)
+  Rendered users/sessions/new.html.erb within layouts/application (65.9ms)
+Completed 200 OK in 113ms (Views: 104.5ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-03-11 19:31:13 +0900
+Processing by Users::SessionsController#new as HTML
+  Rendering users/sessions/new.html.erb within layouts/application
+  Rendered users/shared/_links.html.erb (1.3ms)
+  Rendered users/sessions/new.html.erb within layouts/application (6.9ms)
+Completed 200 OK in 39ms (Views: 37.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-03-11 19:32:07 +0900
+Processing by Users::SessionsController#new as HTML
+  Rendering users/sessions/new.html.erb within layouts/application
+  Rendered users/shared/_links.html.erb (1.9ms)
+  Rendered users/sessions/new.html.erb within layouts/application (82.0ms)
+Completed 200 OK in 125ms (Views: 115.3ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-03-11 19:32:08 +0900
+Processing by Users::SessionsController#new as HTML
+  Rendering users/sessions/new.html.erb within layouts/application
+  Rendered users/shared/_links.html.erb (1.1ms)
+  Rendered users/sessions/new.html.erb within layouts/application (5.0ms)
+Completed 200 OK in 37ms (Views: 34.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2019-03-11 19:32:09 +0900
+Processing by Users::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"I+aXV7UiY54uW3vp8HIv99fo1V4qQtfF5BE16NEjsg1ZHATdz2beGUK69tAUxpF1Th9T3MjDkQwnWp1+4txsNw==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"<span class=\"translation_missing\" title=\"translation missing: ja.users.sessions.new.sign_in\">Sign In</span>"}
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms)
+
+
+Processing by Users::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"I+aXV7UiY54uW3vp8HIv99fo1V4qQtfF5BE16NEjsg1ZHATdz2beGUK69tAUxpF1Th9T3MjDkQwnWp1+4txsNw==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"<span class=\"translation_missing\" title=\"translation missing: ja.users.sessions.new.sign_in\">Sign In</span>"}
+  Rendering users/sessions/new.html.erb within layouts/application
+  Rendered users/shared/_links.html.erb (1.5ms)
+  Rendered users/sessions/new.html.erb within layouts/application (5.9ms)
+Completed 200 OK in 38ms (Views: 36.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2019-03-11 19:32:10 +0900
+Processing by Users::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"YsQEW+m7gVfWc7R8QZmlT7gdBTY99rZ5CloXl2jU/NsYPpfRk/880LqSOUWlLRvNIeqDtN938LDJEb8BWysi4Q==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"<span class=\"translation_missing\" title=\"translation missing: ja.users.sessions.new.sign_in\">Sign In</span>"}
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms)
+
+
+Processing by Users::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"YsQEW+m7gVfWc7R8QZmlT7gdBTY99rZ5CloXl2jU/NsYPpfRk/880LqSOUWlLRvNIeqDtN938LDJEb8BWysi4Q==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"<span class=\"translation_missing\" title=\"translation missing: ja.users.sessions.new.sign_in\">Sign In</span>"}
+  Rendering users/sessions/new.html.erb within layouts/application
+  Rendered users/shared/_links.html.erb (1.6ms)
+  Rendered users/sessions/new.html.erb within layouts/application (6.8ms)
+Completed 200 OK in 39ms (Views: 37.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2019-03-11 19:32:11 +0900
+Processing by Users::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"z7wnPr9s0x5T2UyxEA6i3Z/YAC6v+lGfMOPj12N3O2W1RrS0xShumT84wYj0uhxfBi+GrE17F1bzqEtBUIjlXw==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"<span class=\"translation_missing\" title=\"translation missing: ja.users.sessions.new.sign_in\">Sign In</span>"}
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms)
+
+
+Processing by Users::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"z7wnPr9s0x5T2UyxEA6i3Z/YAC6v+lGfMOPj12N3O2W1RrS0xShumT84wYj0uhxfBi+GrE17F1bzqEtBUIjlXw==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"<span class=\"translation_missing\" title=\"translation missing: ja.users.sessions.new.sign_in\">Sign In</span>"}
+  Rendering users/sessions/new.html.erb within layouts/application
+  Rendered users/shared/_links.html.erb (1.2ms)
+  Rendered users/sessions/new.html.erb within layouts/application (5.3ms)
+Completed 200 OK in 38ms (Views: 37.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2019-03-11 19:32:11 +0900
+Processing by Users::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"1GNzyYCjtynZ8foZvwJpAE3WLy150/geq0wKcT3rxhWumeBD+ucKrrUQdyBbtteC1CGpr5tSvtdoB6LnDhQYLw==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"<span class=\"translation_missing\" title=\"translation missing: ja.users.sessions.new.sign_in\">Sign In</span>"}
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms)
+
+
+Processing by Users::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"1GNzyYCjtynZ8foZvwJpAE3WLy150/geq0wKcT3rxhWumeBD+ucKrrUQdyBbtteC1CGpr5tSvtdoB6LnDhQYLw==", "user"=>{"email"=>"", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"<span class=\"translation_missing\" title=\"translation missing: ja.users.sessions.new.sign_in\">Sign In</span>"}
+  Rendering users/sessions/new.html.erb within layouts/application
+  Rendered users/shared/_links.html.erb (1.7ms)
+  Rendered users/sessions/new.html.erb within layouts/application (6.8ms)
+Completed 200 OK in 39ms (Views: 37.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-03-11 19:34:04 +0900
+Processing by Users::SessionsController#new as HTML
+  Rendering users/sessions/new.html.erb within layouts/application
+  Rendered users/shared/_links.html.erb (1.2ms)
+  Rendered users/sessions/new.html.erb within layouts/application (30.5ms)
+Completed 200 OK in 68ms (Views: 60.2ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-03-11 19:34:06 +0900
+Processing by Users::SessionsController#new as HTML
+  Rendering users/sessions/new.html.erb within layouts/application
+  Rendered users/shared/_links.html.erb (2.4ms)
+  Rendered users/sessions/new.html.erb within layouts/application (9.6ms)
+Completed 200 OK in 37ms (Views: 34.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-03-11 19:35:25 +0900
+Processing by Users::SessionsController#new as HTML
+  Rendering users/sessions/new.html.erb within layouts/application
+  Rendered users/shared/_links.html.erb (1.1ms)
+  Rendered users/sessions/new.html.erb within layouts/application (4.8ms)
+Completed 200 OK in 38ms (Views: 36.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2019-03-11 19:35:52 +0900
+Processing by Users::SessionsController#new as HTML
+  Rendering users/sessions/new.html.erb within layouts/application
+  Rendered users/shared/_links.html.erb (2.5ms)
+  Rendered users/sessions/new.html.erb within layouts/application (8.7ms)
+Completed 200 OK in 35ms (Views: 33.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2019-03-11 19:36:23 +0900
+Processing by ToolsController#home as HTML
+  Rendering tools/home.html.erb within layouts/application
+  Rendered tools/home.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 27ms (Views: 24.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/home" for 127.0.0.1 at 2019-03-11 19:36:25 +0900
+Processing by ToolsController#home as HTML
+  Rendering tools/home.html.erb within layouts/application
+  Rendered tools/home.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 26ms (Views: 23.2ms | ActiveRecord: 0.0ms)
+
+
