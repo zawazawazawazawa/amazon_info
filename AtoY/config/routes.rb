@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   root to: 'tools#home'
   get 'home', to: 'tools#home'
   get 'login', to: 'tools#login'
+  get 'asin', to: 'tools#asin'
+  get 'result', to: 'tools#result'
 end
