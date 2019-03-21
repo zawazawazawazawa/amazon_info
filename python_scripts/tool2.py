@@ -57,84 +57,95 @@ print('start', start_time.strftime("%Y/%m/%d %H:%M:%S"))
 info = {'ASIN': {},'商品名': {}, '商品画像': {}, '商品説明(文章)': {}, '商品説明(画像)': {}, '最低価格': {}, 'Amazonカテゴリ': {}, 'ヤフオクカテゴリ': {}} 
 
 # カテゴリのリストを開く
-category_list = pd.read_csv('python_scripts/category_list.csv')
+category_list = pd.read_csv('category_list.csv')
 
 # ブラウザを起動する
 driver = webdriver.Chrome(chrome_options=options)
 
 # ブラウザでAmazonにアクセスする
 counter = 0
-for ASIN in ASIN_list:
-    driver.get("https://www.amazon.co.jp/exec/obidos/ASIN/{}".format(ASIN))
-    sleep(2)
 
-    # validate
-    assert 'Amazon' in driver.title
+try:
+    for ASIN in ASIN_list:
+        driver.get("https://www.amazon.co.jp/exec/obidos/ASIN/{}".format(ASIN))
+        sleep(2)
 
-    # HTMLを文字コードをUTF-8に変換してから取得します。
-    html = driver.page_source.encode('utf-8')
+        # validate
+        assert 'Amazon' in driver.title
 
-    # BeautifulSoupで扱えるようにパースします
-    soup = BeautifulSoup(html, "html.parser")
+        # HTMLを文字コードをUTF-8に変換してから取得します。
+        html = driver.page_source.encode('utf-8')
 
-    # ASIN
-    info['ASIN'] = ASIN
+        # BeautifulSoupで扱えるようにパースします
+        soup = BeautifulSoup(html, "html.parser")
 
-    # 商品名
-    info['商品名'][ASIN] = soup.select_one("#productTitle").string.strip() if soup.select_one("#productTitle") is not None else ''
+        # ASIN
+        info['ASIN'] = ASIN
 
-    # 商品画像(1枚)
-    image_url = soup.select_one(".a-spacing-small.item.imageThumbnail.a-declarative img")['src'] if soup.select_one(".a-spacing-small.item.imageThumbnail.a-declarative img") is not None else ''
-    info['商品画像'][ASIN] = re.sub('\._[a-zA-Z0-9_,]*_\.', '.', image_url)
+        # 商品名
+        info['商品名'][ASIN] = soup.select_one("#productTitle").string.strip() if soup.select_one("#productTitle") is not None else ''
 
-    # 商品説明(文章)
-    description = ''
-    if soup.select_one("#productDescription") is not None:
-        for string in soup.select_one("#productDescription").stripped_strings:
-            if string != '' and '#productDescription' not in string: # 空白行とstyleタグの中身をfiltering
-                description += string.replace(' ', '')
-        info['商品説明(文章)'][ASIN] = description
-    else:
-        info['商品説明(文章)'][ASIN] = ''
+        # 商品画像(1枚)
+        image_url = soup.select_one(".a-spacing-small.item.imageThumbnail.a-declarative img")['src'] if soup.select_one(".a-spacing-small.item.imageThumbnail.a-declarative img") is not None else ''
+        info['商品画像'][ASIN] = re.sub('\._[a-zA-Z0-9_,]*_\.', '.', image_url)
 
-    # 商品説明(画像)
-    images =  []
-    if soup.select("#productDescription img") is not None:
-        for img in soup.select("#productDescription img"):
-            images.append(img['src'])
-        info['商品説明(画像)'][ASIN]= images
-    else:
-        info['商品説明(画像)'][ASIN]= ''
+        # 商品説明(文章)
+        description = ''
+        if soup.select_one("#productDescription") is not None:
+            for string in soup.select_one("#productDescription").stripped_strings:
+                if string != '' and '#productDescription' not in string: # 空白行とstyleタグの中身をfiltering
+                    description += string.replace(' ', '')
+            info['商品説明(文章)'][ASIN] = description
+        else:
+            info['商品説明(文章)'][ASIN] = ''
 
-    # 最低価格
-    if soup.select_one("#priceblock_ourprice") is not None:
-        info['最低価格'][ASIN] = soup.select_one("#priceblock_ourprice").string.strip('￥ ,').replace(',', '') if '-' not in soup.select_one("#priceblock_ourprice").string else '999999999'
-    elif soup.select_one("#priceblock_dealprice") is not None:
-        info['最低価格'][ASIN] = soup.select_one("#priceblock_dealprice").string.strip('￥ ,').replace(',', '') if '-' not in soup.select_one("#priceblock_dealprice").string else '999999999'
-    else:
-        info['最低価格'][ASIN] = '999999999'
+        # 商品説明(画像)
+        images =  []
+        if soup.select("#productDescription img") is not None:
+            for img in soup.select("#productDescription img"):
+                images.append(img['src'])
+            info['商品説明(画像)'][ASIN]= images
+        else:
+            info['商品説明(画像)'][ASIN]= ''
 
-    # Amazonカテゴリ
-    category_tree = ''
-    if soup.select("#wayfinding-breadcrumbs_feature_div > ul a") is not None:
-        for category in (soup.select("#wayfinding-breadcrumbs_feature_div > ul a")):
-            category_tree += category.string.strip() + '/'
-        a_category = category_tree.rstrip('/')
-    else:
-        a_category = ''
-    info['Amazonカテゴリ'][ASIN] = a_category
-    
-    # ヤフオクカテゴリ
-    if a_category == '':
-        y_category = ''
-    else:
-        y_category = category_list[category_list['Amazonカテゴリ名'] == a_category]['ヤフオクカテゴリID'].values[0]
-    info['ヤフオクカテゴリ'][ASIN] = y_category
+        # 最低価格
+        if soup.select_one("#priceblock_ourprice") is not None:
+            info['最低価格'][ASIN] = soup.select_one("#priceblock_ourprice").string.strip('￥ ,').replace(',', '') if '-' not in soup.select_one("#priceblock_ourprice").string else '999999999'
+        elif soup.select_one("#priceblock_dealprice") is not None:
+            info['最低価格'][ASIN] = soup.select_one("#priceblock_dealprice").string.strip('￥ ,').replace(',', '') if '-' not in soup.select_one("#priceblock_dealprice").string else '999999999'
+        else:
+            info['最低価格'][ASIN] = '999999999'
+
+        # Amazonカテゴリ
+        category_tree = ''
+        if soup.select("#wayfinding-breadcrumbs_feature_div > ul a") is not None:
+            for category in (soup.select("#wayfinding-breadcrumbs_feature_div > ul a")):
+                category_tree += category.string.strip() + '/'
+            a_category = category_tree.rstrip('/')
+        else:
+            a_category = ''
+        info['Amazonカテゴリ'][ASIN] = a_category
+        print(a_category)
+        
+        # ヤフオクカテゴリ
+        if a_category == '':
+            y_category = ''
+        elif not category_list[category_list['Amazonカテゴリ名'] == a_category].empty:
+            y_category = category_list[category_list['Amazonカテゴリ名'] == a_category]['ヤフオクカテゴリID'].values[0]
+        else:
+            large_category = a_category.split('/')[0]
+            print(large_category)
+            y_category = category_list[category_list['Amazonカテゴリ名'] == large_category]['ヤフオクカテゴリID'].values[0]
+
+        info['ヤフオクカテゴリ'][ASIN] = y_category
 
 
 
-    counter += 1
-    print(counter)
+        counter += 1
+        print(counter)
+except:
+    import traceback
+    traceback.print_exc()
 
 driver.quit()
 

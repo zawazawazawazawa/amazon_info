@@ -260,7 +260,13 @@ if os.path.isdir('upload_files'):
 os.mkdir('upload_files')
 
 # csvファイル名を入力
-csv_file = input('Input csv file name: ') + '.csv'
+csv_file = input('CSVファイルの名前を入力してください: ') + '.csv'
+
+# 最低価格の割合を入力
+lp = float(input('最低価格の割合を入力してください: '))
+
+# 即決価格の割合を入力
+dp = float(input('即決価格の割合を入力してください: '))
 
 # amazonの商品情報リストを開く
 amazon_list = pd.read_csv(csv_file)
@@ -278,8 +284,8 @@ for n in range(len(amazon_list.index)):
     new_templete['カテゴリ'] = amazon_list.loc[n]['ヤフオクカテゴリ']
     new_templete['タイトル'] = amazon_list.loc[n]['商品名'][:63]
     new_templete['説明'] = description(amazon_list.loc[n]['商品名'], amazon_list.loc[n]['商品説明(文章)'])
-    new_templete['開始価格'] = amazon_list.loc[n]['最低価格']
-    new_templete['即決価格'] = amazon_list.loc[n]['最低価格']
+    new_templete['開始価格'] = round(int(amazon_list.loc[n]['最低価格']) * lp, 0)
+    new_templete['即決価格'] = round(int(amazon_list.loc[n]['最低価格']) * dp, 0)
     new_templete['画像1'] = '{}.jpg'.format(n)
     
 
@@ -290,7 +296,7 @@ df = pd.DataFrame(result)
 # CSV ファイルとして出力
 df.to_csv("upload_files/data.csv")
 
-fn = input('zip file name :')
+fn = input('zipファイルの名前を入力してください:')
 
 shutil.make_archive(fn, 'zip', 'upload_files')
 
