@@ -18,7 +18,7 @@ import os
 options = Options()
 
 # Headlessモードを有効にする（コメントアウトするとブラウザが実際に立ち上がります）
-options.add_argument('--headless')
+# options.add_argument('--headless')
 
 # 暫定的に必要らしい
 options.add_argument('--disable-gpu')
@@ -41,7 +41,7 @@ options.add_argument('--blink-settings=imagesEnabled=false')
 
 # ASINを入力
 ASIN_list = []
-print('Paste ASIN List\nAnd pless "f" key to finish')
+print('ASINリストを貼り付けてください\n最後にfとreturnを押してください')
 
 while True:
     input_chr = input()
@@ -65,8 +65,8 @@ driver = webdriver.Chrome(chrome_options=options)
 # ブラウザでAmazonにアクセスする
 counter = 0
 
-try:
-    for ASIN in ASIN_list:
+for ASIN in ASIN_list:
+    try:
         driver.get("https://www.amazon.co.jp/exec/obidos/ASIN/{}".format(ASIN))
         sleep(2)
 
@@ -80,13 +80,13 @@ try:
         soup = BeautifulSoup(html, "html.parser")
 
         # ASIN
-        info['ASIN'] = ASIN
+        info['ASIN'][ASIN] = ASIN
 
         # 商品名
-        info['商品名'][ASIN] = soup.select_one("#productTitle").string.strip() if soup.select_one("#productTitle") is not None else ''
+        info['商品名'][ASIN] = soup.select_one("#productTitle").text.replace('  \n', '') if soup.select_one("#productTitle") is not None else ''
 
         # 商品画像(1枚)
-        image_url = soup.select_one(".a-spacing-small.item.imageThumbnail.a-declarative img")['src'] if soup.select_one(".a-spacing-small.item.imageThumbnail.a-declarative img") is not None else ''
+        image_url = soup.select_one("#imgTagWrapperId > img")['data-old-hires'] if soup.select_one("#imgTagWrapperId > img") is not None else ''
         info['商品画像'][ASIN] = re.sub('\._[a-zA-Z0-9_,]*_\.', '.', image_url)
 
         # 商品説明(文章)
@@ -125,8 +125,7 @@ try:
         else:
             a_category = ''
         info['Amazonカテゴリ'][ASIN] = a_category
-        print(a_category)
-        
+
         # ヤフオクカテゴリ
         if a_category == '':
             y_category = ''
@@ -134,18 +133,20 @@ try:
             y_category = category_list[category_list['Amazonカテゴリ名'] == a_category]['ヤフオクカテゴリID'].values[0]
         else:
             large_category = a_category.split('/')[0]
-            print(large_category)
             y_category = category_list[category_list['Amazonカテゴリ名'] == large_category]['ヤフオクカテゴリID'].values[0]
 
         info['ヤフオクカテゴリ'][ASIN] = y_category
 
-
-
         counter += 1
         print(counter)
-except:
-    import traceback
-    traceback.print_exc()
+
+    except AssertionError:
+        print(ASIN,'は無効なASINです')
+        continue
+
+    except TimeoutError:
+        import traceback
+        traceback.print_exc()
 
 driver.quit()
 

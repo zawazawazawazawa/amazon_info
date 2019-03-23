@@ -276,9 +276,10 @@ result = []
 
 for n in range(len(amazon_list.index)):
     # 画像を取得
-    r = requests.get(amazon_list.loc[n]['商品画像'])
-    with open('upload_files/{}.jpg'.format(n), 'wb') as f: #数字.jpgで保存
-        f.write(r.content)
+    if amazon_list.loc[n]['商品画像'] != 'nan':
+        r = requests.get(amazon_list.loc[n]['商品画像'])
+        with open('upload_files/{}.jpg'.format(n), 'wb') as f: #数字.jpgで保存
+            f.write(r.content)
 
     new_templete = copy.deepcopy(templete)
     new_templete['カテゴリ'] = amazon_list.loc[n]['ヤフオクカテゴリ']
