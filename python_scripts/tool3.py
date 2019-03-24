@@ -295,13 +295,6 @@ for n in range(len(amazon_list.index)):
         new_templete['開始価格'] = int(round(int(amazon_list.loc[n]['最低価格']) * lp, 0)) 
         new_templete['即決価格'] = int(round(int(amazon_list.loc[n]['最低価格']) * dp, 0))
 
-        # # 画像を取得
-        # if amazon_list.loc[n]['商品画像'] == amazon_list.loc[n]['商品画像']:
-        #     r = requests.get(amazon_list.loc[n]['商品画像'])
-        #     with open('upload_files/{}.jpg'.format(n), 'wb') as f: #数字.jpgで保存
-        #         f.write(r.content)
-        # new_templete['画像1'] = '{}.jpg'.format(n)
-
         #画像保存先
         image_file=r"upload_files/{}.jpg".format(n)
         img_base64 = amazon_list.loc[n]['商品画像']
@@ -313,20 +306,9 @@ for n in range(len(amazon_list.index)):
         #raw image <- jpg
         img = cv2.imdecode(jpg, cv2.IMREAD_COLOR)
 
-
-        img = cv2.imread(str(img))
-        print(img.shape)
-        if img.shape[1] / img.shape[0] > 2.5:
-            heigth = img.shape[0]
-            width = img.shape[0] * 2.4
-            img = cv2.resize(img,(width,height))
-            print('resize! ', img.shape)
-
-
-
-
         #画像を保存する場合
         cv2.imwrite(image_file,img)
+
         new_templete['画像1'] = '{}.jpg'.format(n)
 
         result.append(new_templete)
