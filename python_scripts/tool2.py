@@ -95,9 +95,6 @@ try:
         # BeautifulSoupで扱えるようにパースします
         soup = BeautifulSoup(html, "html.parser")
 
-        # ASIN
-        info['ASIN'][ASIN] = ASIN
-
         # 商品名 
         if soup.select_one("#productTitle") is None:
             err_msg("商品名")
@@ -139,6 +136,8 @@ try:
 
 
         # 各要素をinfoに登録
+        info['ASIN'][ASIN] = ASIN
+        
         info['商品名'][ASIN] = soup.select_one("#productTitle").text.replace('\n', '').replace(' ', '')
         
         img_src = soup.select_one("#imgTagWrapperId > img")['src'].strip().replace('data:image/jpeg;base64,', '')
