@@ -4,6 +4,10 @@ import requests
 import os
 import zipfile
 import shutil
+import cv2
+import base64
+import numpy as np
+import io
 
 def description(title, description):
     description = ('<center>'
@@ -275,22 +279,63 @@ amazon_list = pd.read_csv(csv_file)
 result = []
 
 for n in range(len(amazon_list.index)):
-    # 画像を取得
-    if amazon_list.loc[n]['商品画像'] != 'nan':
-        r = requests.get(amazon_list.loc[n]['商品画像'])
-        with open('upload_files/{}.jpg'.format(n), 'wb') as f: #数字.jpgで保存
-            f.write(r.content)
+    try:
+        new_templete = copy.deepcopy(templete)
 
-    new_templete = copy.deepcopy(templete)
-    new_templete['カテゴリ'] = amazon_list.loc[n]['ヤフオクカテゴリ']
-    new_templete['タイトル'] = amazon_list.loc[n]['商品名'][:63]
-    new_templete['説明'] = description(amazon_list.loc[n]['商品名'], amazon_list.loc[n]['商品説明(文章)'])
-    new_templete['開始価格'] = round(int(amazon_list.loc[n]['最低価格']) * lp, 0)
-    new_templete['即決価格'] = round(int(amazon_list.loc[n]['最低価格']) * dp, 0)
-    new_templete['画像1'] = '{}.jpg'.format(n)
+        assert amazon_list.loc[n]['ヤフオクカテゴリ'] == amazon_list.loc[n]['ヤフオクカテゴリ']
+        new_templete['カテゴリ'] = int(amazon_list.loc[n]['ヤフオクカテゴリ'])
+
+        assert amazon_list.loc[n]['商品名'] == amazon_list.loc[n]['商品名']
+        new_templete['タイトル'] = amazon_list.loc[n]['商品名'][:63] 
+
+        assert amazon_list.loc[n]['商品説明(文章)'] == amazon_list.loc[n]['商品説明(文章)']
+        new_templete['説明'] = description(amazon_list.loc[n]['商品名'], amazon_list.loc[n]['商品説明(文章)']) 
+
+        assert amazon_list.loc[n]['最低価格'] == amazon_list.loc[n]['最低価格']
+        new_templete['開始価格'] = int(round(int(amazon_list.loc[n]['最低価格']) * lp, 0)) 
+        new_templete['即決価格'] = int(round(int(amazon_list.loc[n]['最低価格']) * dp, 0))
+
+        # # 画像を取得
+        # if amazon_list.loc[n]['商品画像'] == amazon_list.loc[n]['商品画像']:
+        #     r = requests.get(amazon_list.loc[n]['商品画像'])
+        #     with open('upload_files/{}.jpg'.format(n), 'wb') as f: #数字.jpgで保存
+        #         f.write(r.content)
+        # new_templete['画像1'] = '{}.jpg'.format(n)
+
+        #画像保存先
+        image_file=r"upload_files/{}.jpg".format(n)
+        img_base64 = amazon_list.loc[n]['商品画像']
+
+        #バイナリデータ <- base64でエンコードされたデータ  
+        img_binary = base64.b64decode(img_base64)
+        jpg=np.frombuffer(img_binary,dtype=np.uint8)
+
+        #raw image <- jpg
+        img = cv2.imdecode(jpg, cv2.IMREAD_COLOR)
+
+
+        img = cv2.imread(str(img))
+        print(img.shape)
+        if img.shape[1] / img.shape[0] > 2.5:
+            heigth = img.shape[0]
+            width = img.shape[0] * 2.4
+            img = cv2.resize(img,(width,height))
+            print('resize! ', img.shape)
+
+
+
+
+        #画像を保存する場合
+        cv2.imwrite(image_file,img)
+        new_templete['画像1'] = '{}.jpg'.format(n)
+
+        result.append(new_templete)
     
-
-    result.append(new_templete)
+    except:
+        import traceback
+        traceback.print_exc()
+        print(amazon_list.loc[n]['ASIN'], 'は出品できません')
+        continue 
                                                 
 df = pd.DataFrame(result)
 

@@ -13,12 +13,16 @@ import pandas as pd
 from datetime import datetime
 import re
 import os
+from selenium.common.exceptions import TimeoutException
+
+def err_msg(col):
+    print(ASIN, 'は取得できませんでした({})'.format(col))
 
 # ブラウザのオプションを格納する変数をもらってきます。
 options = Options()
 
 # Headlessモードを有効にする（コメントアウトするとブラウザが実際に立ち上がります）
-# options.add_argument('--headless')
+options.add_argument('--headless')
 
 # 暫定的に必要らしい
 options.add_argument('--disable-gpu')
@@ -65,13 +69,25 @@ driver = webdriver.Chrome(chrome_options=options)
 # ブラウザでAmazonにアクセスする
 counter = 0
 
-for ASIN in ASIN_list:
-    try:
-        driver.get("https://www.amazon.co.jp/exec/obidos/ASIN/{}".format(ASIN))
-        sleep(2)
-
-        # validate
-        assert 'Amazon' in driver.title
+try:
+    for ASIN in ASIN_list:
+        try:
+            driver.get("https://www.amazon.co.jp/exec/obidos/ASIN/{}".format(ASIN))
+            sleep(2)
+        except TimeoutException:
+            import traceback
+            traceback.print_exc()
+            print('Amazonにアクセスして表示を確認してください\n文字の入力を支持されている場合は指示に従ってください')
+            break
+        
+        try:
+            # validate
+            assert 'Amazon' in driver.title
+        except AssertionError:
+            import traceback
+            traceback.print_exc()
+            print(ASIN, 'は無効なASINである可能性があります')
+            continue
 
         # HTMLを文字コードをUTF-8に変換してから取得します。
         html = driver.page_source.encode('utf-8')
@@ -82,71 +98,91 @@ for ASIN in ASIN_list:
         # ASIN
         info['ASIN'][ASIN] = ASIN
 
-        # 商品名
-        info['商品名'][ASIN] = soup.select_one("#productTitle").text.replace('  \n', '') if soup.select_one("#productTitle") is not None else ''
+        # 商品名 
+        if soup.select_one("#productTitle") is None:
+            err_msg("商品名")
+            continue
 
         # 商品画像(1枚)
-        image_url = soup.select_one("#imgTagWrapperId > img")['data-old-hires'] if soup.select_one("#imgTagWrapperId > img") is not None else ''
-        info['商品画像'][ASIN] = re.sub('\._[a-zA-Z0-9_,]*_\.', '.', image_url)
-
+        if soup.select_one("#imgTagWrapperId > img") is None:
+            err_msg("商品画像")
+            continue
+        
         # 商品説明(文章)
-        description = ''
-        if soup.select_one("#productDescription") is not None:
-            for string in soup.select_one("#productDescription").stripped_strings:
-                if string != '' and '#productDescription' not in string: # 空白行とstyleタグの中身をfiltering
-                    description += string.replace(' ', '')
-            info['商品説明(文章)'][ASIN] = description
-        else:
-            info['商品説明(文章)'][ASIN] = ''
-
-        # 商品説明(画像)
-        images =  []
-        if soup.select("#productDescription img") is not None:
-            for img in soup.select("#productDescription img"):
-                images.append(img['src'])
-            info['商品説明(画像)'][ASIN]= images
-        else:
-            info['商品説明(画像)'][ASIN]= ''
+        if soup.select_one("#productDescription") is None:
+            err_msg('商品説明(文章)')
+            continue
 
         # 最低価格
-        if soup.select_one("#priceblock_ourprice") is not None:
-            info['最低価格'][ASIN] = soup.select_one("#priceblock_ourprice").string.strip('￥ ,').replace(',', '') if '-' not in soup.select_one("#priceblock_ourprice").string else '999999999'
-        elif soup.select_one("#priceblock_dealprice") is not None:
-            info['最低価格'][ASIN] = soup.select_one("#priceblock_dealprice").string.strip('￥ ,').replace(',', '') if '-' not in soup.select_one("#priceblock_dealprice").string else '999999999'
-        else:
-            info['最低価格'][ASIN] = '999999999'
+        if (soup.select_one("#priceblock_ourprice") is None) and (soup.select_one("#priceblock_dealprice") is None) and (soup.select_one(".offer-price") is None):
+            err_msg('最低価格')
+            continue
 
         # Amazonカテゴリ
+        if soup.select('.a-list-item > a') is False:
+            err_msg('Amazonカテゴリ')
+            continue
+
         category_tree = ''
-        if soup.select("#wayfinding-breadcrumbs_feature_div > ul a") is not None:
-            for category in (soup.select("#wayfinding-breadcrumbs_feature_div > ul a")):
+        print(soup.select('.a-list-item > a'))
+        for category in (soup.select('.a-list-item > a')):
+            if category.string:
                 category_tree += category.string.strip() + '/'
-            a_category = category_tree.rstrip('/')
+        a_category = category_tree.rstrip('/')
+        print(a_category)
+        
+        # ヤフオクカテゴリ
+        large_category = a_category.split('/')[0]
+        if category_list[category_list['Amazonカテゴリ名'] == large_category].empty:
+            err_msg('ヤフオクカテゴリ')
+            continue
+
+
+        # 各要素をinfoに登録
+        info['商品名'][ASIN] = soup.select_one("#productTitle").text.replace('\n', '').replace(' ', '')
+        
+        img_src = soup.select_one("#imgTagWrapperId > img")['src'].strip().replace('data:image/jpeg;base64,', '')
+        info['商品画像'][ASIN] = img_src
+
+        description = ''
+        for string in soup.select_one("#productDescription").stripped_strings:
+            if string != '' and '#productDescription' not in string: # 空白行とstyleタグの中身をfiltering
+                description += string.replace(' ', '')
+        info['商品説明(文章)'][ASIN] = description
+
+        images =  []
+        for img in soup.select("#productDescription img"):
+            images.append(img['src'])
+        info['商品説明(画像)'][ASIN]= images
+
+        if soup.select_one("#priceblock_ourprice"):
+            info['最低価格'][ASIN] = soup.select_one("#priceblock_ourprice").text.strip('￥ ,').replace(',', '') if '-' not in soup.select_one("#priceblock_ourprice").text else '999999999'
+        elif soup.select_one("#priceblock_dealprice"):
+            info['最低価格'][ASIN] = soup.select_one("#priceblock_dealprice").text.strip('￥ ,').replace(',', '') if '-' not in soup.select_one("#priceblock_dealprice").text else '999999999'
+        elif soup.select_one(".offer-price"):
+            info['最低価格'][ASIN] = soup.select_one(".offer-price") if '-' not in soup.select_one(".offer-price").text else '999999999'
         else:
-            a_category = ''
+            '999999999'
+        
         info['Amazonカテゴリ'][ASIN] = a_category
 
-        # ヤフオクカテゴリ
-        if a_category == '':
-            y_category = ''
-        elif not category_list[category_list['Amazonカテゴリ名'] == a_category].empty:
+        if not category_list[category_list['Amazonカテゴリ名'] == a_category].empty:
             y_category = category_list[category_list['Amazonカテゴリ名'] == a_category]['ヤフオクカテゴリID'].values[0]
         else:
-            large_category = a_category.split('/')[0]
             y_category = category_list[category_list['Amazonカテゴリ名'] == large_category]['ヤフオクカテゴリID'].values[0]
-
         info['ヤフオクカテゴリ'][ASIN] = y_category
+
+        print('ASIN: ', ASIN)
+        print('商品名: ', info['商品名'][ASIN])
+        print('商品説明(文章): ', info['商品説明(文章)'][ASIN])
+        print('最低価格: ', info['最低価格'][ASIN])
+        print('Amazonカテゴリ: ', info['Amazonカテゴリ'][ASIN])
+        print('ヤフオクカテゴリ: ', info['ヤフオクカテゴリ'][ASIN])
 
         counter += 1
         print(counter)
-
-    except AssertionError:
-        print(ASIN,'は無効なASINです')
-        continue
-
-    except TimeoutError:
-        import traceback
-        traceback.print_exc()
+except KeyboardInterrupt:
+    pass
 
 driver.quit()
 
@@ -157,7 +193,7 @@ finish_time = datetime.now()
 print('finish', finish_time.strftime("%Y/%m/%d %H:%M:%S"))
 print('time', finish_time - start_time)
 
-fn = input('File name :')
+fn = input('ファイル名を入力してください :')
 
 # CSV ファイルとして出力
 result.to_csv("{}.csv".format(fn))

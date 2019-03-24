@@ -35,13 +35,13 @@ def get_asin(url):
         get_asin(domain+nextUrl)
 
 # URLを入力
-url = input('URLを入力してください: ')
+url = input('検索結果のURLを入力してください: ')
 
 # ブラウザのオプションを格納する変数をもらってきます。
 options = Options()
 
 # Headlessモードを有効にする（コメントアウトするとブラウザが実際に立ち上がります）
-# options.add_argument('--headless')
+options.add_argument('--headless')
 
 # 暫定的に必要らしい
 options.add_argument('--disable-gpu')
