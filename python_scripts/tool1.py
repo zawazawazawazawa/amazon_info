@@ -30,9 +30,15 @@ def get_asin(url):
         asin = li_element['data-asin']
         asin_list.append(asin)
 
-    if soup.select_one('#pagnNextLink') and len(asin_list) < max:
-        nextUrl = soup.select_one('#pagnNextLink')['href']
-        get_asin(domain+nextUrl)
+    print(len(asin_list))
+
+    if len(asin_list) < max:
+        if soup.select_one('#pagnNextLink'):
+            nextUrl = soup.select_one('#pagnNextLink')['href']
+            get_asin(domain+nextUrl)
+        elif soup.select_one('.a-last > a'):
+            nextUrl = soup.select_one('.a-last > a')['href']
+            get_asin(domain+nextUrl)
 
 # URLを入力
 url = input('検索結果のURLを入力してください: ')
@@ -73,6 +79,7 @@ print('start', start_time.strftime("%Y/%m/%d %H:%M:%S"))
 
 # ブラウザを起動する
 driver = webdriver.Chrome(chrome_options=options)
+sleep(2)
 
 get_asin(url)
 driver.quit()

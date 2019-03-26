@@ -306,6 +306,13 @@ for n in range(len(amazon_list.index)):
         #raw image <- jpg
         img = cv2.imdecode(jpg, cv2.IMREAD_COLOR)
 
+        height = img.shape[0]
+        width  = img.shape[1]
+
+        if width / height > 2.5:
+            size = (height*4, height*2)
+            img = cv2.resize(img, size)
+
         #画像を保存する場合
         cv2.imwrite(image_file,img)
 

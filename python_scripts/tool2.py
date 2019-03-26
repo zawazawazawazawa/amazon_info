@@ -137,7 +137,7 @@ try:
 
         # 各要素をinfoに登録
         info['ASIN'][ASIN] = ASIN
-        
+
         info['商品名'][ASIN] = soup.select_one("#productTitle").text.replace('\n', '').replace(' ', '')
         
         img_src = soup.select_one("#imgTagWrapperId > img")['src'].strip().replace('data:image/jpeg;base64,', '')
@@ -159,7 +159,7 @@ try:
         elif soup.select_one("#priceblock_dealprice"):
             info['最低価格'][ASIN] = soup.select_one("#priceblock_dealprice").text.strip('￥ ,').replace(',', '') if '-' not in soup.select_one("#priceblock_dealprice").text else '999999999'
         elif soup.select_one(".offer-price"):
-            info['最低価格'][ASIN] = soup.select_one(".offer-price") if '-' not in soup.select_one(".offer-price").text else '999999999'
+            info['最低価格'][ASIN] = soup.select_one(".offer-price").text.strip('￥ ,').replace(',', '') if '-' not in soup.select_one(".offer-price").text else '999999999'
         else:
             '999999999'
         
