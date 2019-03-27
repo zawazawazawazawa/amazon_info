@@ -1,6 +1,6 @@
 <h1>asin</h1>
 
-<%= form_with url: result_path do |f| %>
+<%= form_with(url: asin_path, method: :post) do |f| %>
     <%= f.text_area :asin %>
     <%= f.submit %>
 <% end %>

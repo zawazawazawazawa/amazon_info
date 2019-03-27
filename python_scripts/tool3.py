@@ -272,6 +272,12 @@ lp = float(input('最低価格の割合を入力してください: '))
 # 即決価格の割合を入力
 dp = float(input('即決価格の割合を入力してください: '))
 
+# 送料を入力
+postage = int(input('送料を入力してください: '))
+
+# 開催期間を入力
+op = int(input('開催期間を入力してください: '))
+
 # amazonの商品情報リストを開く
 amazon_list = pd.read_csv(csv_file)
 
@@ -319,6 +325,9 @@ for n in range(len(amazon_list.index)):
         new_templete['画像1'] = '{}.jpg'.format(n)
 
         result.append(new_templete)
+
+        new_templete['配送方法1全国一律価格'] = postage
+        new_templete['開催期間'] = op
     
     except:
         import traceback

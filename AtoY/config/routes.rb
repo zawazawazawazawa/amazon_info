@@ -6,5 +6,6 @@ Rails.application.routes.draw do
   get 'home', to: 'tools#home'
   get 'login', to: 'tools#login'
   get 'asin', to: 'tools#asin'
-  get 'result', to: 'tools#result'
+  post 'asin', to: 'tools#postasin'
+  get 'asin', to: 'tools#result'
 end

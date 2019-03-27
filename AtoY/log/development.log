@@ -904,3 +904,312 @@ puma (3.12.0) lib/puma/server.rb:658:in `handle_request'
 puma (3.12.0) lib/puma/server.rb:472:in `process_client'
 puma (3.12.0) lib/puma/server.rb:332:in `block in run'
 puma (3.12.0) lib/puma/thread_pool.rb:133:in `block in spawn_thread'
+Started GET "/" for 127.0.0.1 at 2019-03-15 09:35:58 +0100
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Library/Ruby/Gems/2.3.0/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+Processing by ToolsController#home as HTML
+  Rendering tools/home.html.erb within layouts/application
+  Rendered tools/home.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 229ms (Views: 198.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/asin" for 127.0.0.1 at 2019-03-15 09:36:00 +0100
+Processing by ToolsController#asin as HTML
+  Rendering tools/asin.html.erb within layouts/application
+  Rendered tools/asin.html.erb within layouts/application (62.7ms)
+Completed 200 OK in 93ms (Views: 88.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/result" for 127.0.0.1 at 2019-03-15 09:36:04 +0100
+  
+ActionController::RoutingError (No route matches [POST] "/result"):
+  
+actionpack (5.2.2) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.2) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.2) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.6) lib/rack/method_override.rb:22:in `call'
+rack (2.0.6) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.6) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.2) lib/rails/engine.rb:524:in `call'
+puma (3.12.0) lib/puma/configuration.rb:225:in `call'
+puma (3.12.0) lib/puma/server.rb:658:in `handle_request'
+puma (3.12.0) lib/puma/server.rb:472:in `process_client'
+puma (3.12.0) lib/puma/server.rb:332:in `block in run'
+puma (3.12.0) lib/puma/thread_pool.rb:133:in `block in spawn_thread'
+Started POST "/result" for 127.0.0.1 at 2019-03-15 09:36:05 +0100
+  
+ActionController::RoutingError (No route matches [POST] "/result"):
+  
+actionpack (5.2.2) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.2) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.2) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.6) lib/rack/method_override.rb:22:in `call'
+rack (2.0.6) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.6) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.2) lib/rails/engine.rb:524:in `call'
+puma (3.12.0) lib/puma/configuration.rb:225:in `call'
+puma (3.12.0) lib/puma/server.rb:658:in `handle_request'
+puma (3.12.0) lib/puma/server.rb:472:in `process_client'
+puma (3.12.0) lib/puma/server.rb:332:in `block in run'
+puma (3.12.0) lib/puma/thread_pool.rb:133:in `block in spawn_thread'
+Started POST "/result" for 127.0.0.1 at 2019-03-15 09:36:05 +0100
+  
+ActionController::RoutingError (No route matches [POST] "/result"):
+  
+actionpack (5.2.2) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.2) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.2) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.6) lib/rack/method_override.rb:22:in `call'
+rack (2.0.6) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.6) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.2) lib/rails/engine.rb:524:in `call'
+puma (3.12.0) lib/puma/configuration.rb:225:in `call'
+puma (3.12.0) lib/puma/server.rb:658:in `handle_request'
+puma (3.12.0) lib/puma/server.rb:472:in `process_client'
+puma (3.12.0) lib/puma/server.rb:332:in `block in run'
+puma (3.12.0) lib/puma/thread_pool.rb:133:in `block in spawn_thread'
+Started GET "/result" for 127.0.0.1 at 2019-03-15 09:41:53 +0100
+Processing by ToolsController#result as HTML
+  Rendering tools/result.html.erb within layouts/application
+  Rendered tools/result.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 27ms (Views: 23.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/result" for 127.0.0.1 at 2019-03-15 09:47:22 +0100
+  
+ActionController::RoutingError (No route matches [GET] "/result"):
+  
+actionpack (5.2.2) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.2) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.2) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.2) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.6) lib/rack/method_override.rb:22:in `call'
+rack (2.0.6) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.2) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.6) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.2) lib/rails/engine.rb:524:in `call'
+puma (3.12.0) lib/puma/configuration.rb:225:in `call'
+puma (3.12.0) lib/puma/server.rb:658:in `handle_request'
+puma (3.12.0) lib/puma/server.rb:472:in `process_client'
+puma (3.12.0) lib/puma/server.rb:332:in `block in run'
+puma (3.12.0) lib/puma/thread_pool.rb:133:in `block in spawn_thread'
+Started GET "/asin" for 127.0.0.1 at 2019-03-15 09:47:28 +0100
+Processing by ToolsController#asin as HTML
+  Rendering tools/asin.html.erb within layouts/application
+  Rendered tools/asin.html.erb within layouts/application (314.4ms)
+Completed 500 Internal Server Error in 326ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `result_path' for #<#<Class:0x00007f9d869865b8>:0x00007f9d86996698>):
+    1: <h1>asin</h1>
+    2: 
+    3: <%= form_with url: result_path do |f| %>
+    4:     <%= f.text_area :asin %>
+    5:     <%= f.submit %>
+    6: <% end %>
+  
+app/views/tools/asin.html.erb:3:in `_app_views_tools_asin_html_erb___1151688300599326295_70157272366520'
+Started GET "/asin" for 127.0.0.1 at 2019-03-15 09:50:06 +0100
+Processing by ToolsController#asin as HTML
+  Rendering tools/asin.html.erb within layouts/application
+  Rendered tools/asin.html.erb within layouts/application (222.5ms)
+Completed 500 Internal Server Error in 234ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `result_path' for #<#<Class:0x00007f9d85969f18>:0x00007f9d856735e8>):
+    1: <h1>asin</h1>
+    2: 
+    3: <%= form_with url: result_path do |f| %>
+    4:     <%= f.text_area :asin %>
+    5:     <%= f.submit %>
+    6: <% end %>
+  
+app/views/tools/asin.html.erb:3:in `_app_views_tools_asin_html_erb___1151688300599326295_70157263949340'
+Started GET "/asin" for 127.0.0.1 at 2019-03-15 09:50:35 +0100
+Processing by ToolsController#asin as HTML
+  Rendering tools/asin.html.erb within layouts/application
+  Rendered tools/asin.html.erb within layouts/application (1.0ms)
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 0.0ms)
+
+
+  
+SyntaxError (/Users/shinichiro/Products/amazon_info/AtoY/app/views/tools/asin.html.erb:3: syntax error, unexpected tLABEL, expecting keyword_do or '{' or '('
+...orm_with url: asin_path method: :post do |f| @output_buffer....
+...                               ^
+/Users/shinichiro/Products/amazon_info/AtoY/app/views/tools/asin.html.erb:8: syntax error, unexpected keyword_ensure, expecting end-of-input):
+  
+app/views/tools/asin.html.erb:3: syntax error, unexpected tLABEL, expecting keyword_do or '{' or '('
+app/views/tools/asin.html.erb:8: syntax error, unexpected keyword_ensure, expecting end-of-input
+Started GET "/asin" for 127.0.0.1 at 2019-03-15 09:51:17 +0100
+Processing by ToolsController#asin as HTML
+  Rendering tools/asin.html.erb within layouts/application
+  Rendered tools/asin.html.erb within layouts/application (0.6ms)
+Completed 500 Internal Server Error in 12ms (ActiveRecord: 0.0ms)
+
+
+  
+SyntaxError (/Users/shinichiro/Products/amazon_info/AtoY/app/views/tools/asin.html.erb:3: syntax error, unexpected tLABEL, expecting keyword_do or '{' or '('
+...orm_with(url: asin_path method: :post) do |f| @output_buffer...
+...                               ^
+/Users/shinichiro/Products/amazon_info/AtoY/app/views/tools/asin.html.erb:8: syntax error, unexpected keyword_ensure, expecting end-of-input):
+  
+app/views/tools/asin.html.erb:3: syntax error, unexpected tLABEL, expecting keyword_do or '{' or '('
+app/views/tools/asin.html.erb:8: syntax error, unexpected keyword_ensure, expecting end-of-input
+Started GET "/asin" for 127.0.0.1 at 2019-03-15 09:52:20 +0100
+Processing by ToolsController#asin as HTML
+  Rendering tools/asin.html.erb within layouts/application
+  Rendered tools/asin.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 25ms (Views: 22.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/asin" for 127.0.0.1 at 2019-03-15 09:52:24 +0100
+Processing by ToolsController#postasin as JS
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"mYPhXgtlgeBNckdzbjNmy/ruPYjIJiX/Xz5lsCKFOjOWPS39gsUAGcis4P3w30RIDjWNjcKnSBhBQW9U4J75eA==", "asin"=>"sdfg", "commit"=>"Submit "}
+Completed 500 Internal Server Error in 139ms (ActiveRecord: 0.0ms)
+
+
+  
+NameError (undefined local variable or method `result_path' for #<ToolsController:0x00007f9d878606d8>
+Did you mean?  result):
+  
+app/controllers/tools_controller.rb:17:in `postasin'
+Started POST "/asin" for 127.0.0.1 at 2019-03-15 09:52:25 +0100
+Processing by ToolsController#postasin as JS
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"mYPhXgtlgeBNckdzbjNmy/ruPYjIJiX/Xz5lsCKFOjOWPS39gsUAGcis4P3w30RIDjWNjcKnSBhBQW9U4J75eA==", "asin"=>"sdfg", "commit"=>"Submit "}
+Completed 500 Internal Server Error in 151ms (ActiveRecord: 0.0ms)
+
+
+  
+NameError (undefined local variable or method `result_path' for #<ToolsController:0x00007f9d86e799a8>
+Did you mean?  result):
+  
+app/controllers/tools_controller.rb:17:in `postasin'
+Started POST "/asin" for 127.0.0.1 at 2019-03-15 09:52:29 +0100
+Processing by ToolsController#postasin as JS
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"mYPhXgtlgeBNckdzbjNmy/ruPYjIJiX/Xz5lsCKFOjOWPS39gsUAGcis4P3w30RIDjWNjcKnSBhBQW9U4J75eA==", "asin"=>"sdfg", "commit"=>"Submit "}
+Completed 500 Internal Server Error in 184ms (ActiveRecord: 0.0ms)
+
+
+  
+NameError (undefined local variable or method `result_path' for #<ToolsController:0x00007f9d8e1f0378>
+Did you mean?  result):
+  
+app/controllers/tools_controller.rb:17:in `postasin'
+Started GET "/" for 127.0.0.1 at 2019-03-15 09:59:37 +0100
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Library/Ruby/Gems/2.3.0/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+Processing by ToolsController#home as HTML
+  Rendering tools/home.html.erb within layouts/application
+  Rendered tools/home.html.erb within layouts/application (1.2ms)
+Completed 200 OK in 197ms (Views: 172.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/asin" for 127.0.0.1 at 2019-03-15 09:59:48 +0100
+Processing by ToolsController#asin as HTML
+  Rendering tools/asin.html.erb within layouts/application
+  Rendered tools/asin.html.erb within layouts/application (38.4ms)
+Completed 200 OK in 66ms (Views: 63.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/asin" for 127.0.0.1 at 2019-03-15 09:59:51 +0100
+Processing by ToolsController#postasin as JS
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"nR4UXoC+RkNEpfAakF326aVQVonX1eAeeihj8D0aAU2MPU/8+yj5Rw6oQ6YDoIDWyOei/+nd3qk1HE1ympgHog==", "asin"=>"dfghj", "commit"=>"Submit "}
+Completed 500 Internal Server Error in 185ms (ActiveRecord: 0.0ms)
+
+
+  
+NameError (undefined local variable or method `result_path' for #<ToolsController:0x00007fea32c55db8>
+Did you mean?  result):
+  
+app/controllers/tools_controller.rb:17:in `postasin'
+Started POST "/asin" for 127.0.0.1 at 2019-03-15 09:59:53 +0100
+Processing by ToolsController#postasin as JS
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"nR4UXoC+RkNEpfAakF326aVQVonX1eAeeihj8D0aAU2MPU/8+yj5Rw6oQ6YDoIDWyOei/+nd3qk1HE1ympgHog==", "asin"=>"dfghj", "commit"=>"Submit "}
+Completed 500 Internal Server Error in 215ms (ActiveRecord: 0.0ms)
+
+
+  
+NameError (undefined local variable or method `result_path' for #<ToolsController:0x00007fea3114e948>
+Did you mean?  result):
+  
+app/controllers/tools_controller.rb:17:in `postasin'
+Started GET "/asin" for 127.0.0.1 at 2019-03-15 10:00:35 +0100
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Library/Ruby/Gems/2.3.0/gems/activerecord-5.2.2/lib/active_record/log_subscriber.rb:98
+Processing by ToolsController#asin as HTML
+  Rendering tools/asin.html.erb within layouts/application
+  Rendered tools/asin.html.erb within layouts/application (33.3ms)
+Completed 200 OK in 242ms (Views: 222.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/asin" for 127.0.0.1 at 2019-03-15 10:00:38 +0100
+Processing by ToolsController#postasin as JS
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"icuGT4zgC5qPn9/CjDhNOzQsDfPOPTdfJadAtIrX+ImGdUrsBUCKYwpBeEwS1G+4wPe99sS8Wrg72EpQSMw7wg==", "asin"=>"ghj", "commit"=>"Submit "}
+Redirected to 
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionController::ActionControllerError (Cannot redirect to nil!):
+  
+app/controllers/tools_controller.rb:17:in `postasin'

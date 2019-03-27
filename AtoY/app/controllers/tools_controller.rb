@@ -9,7 +9,12 @@ class ToolsController < ApplicationController
     end
 
     def asin
+        
+    end
+
+    def postasin
         @asin = params[:asin]
+        redirect_to result
     end
 
     def result
