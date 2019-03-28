@@ -263,20 +263,30 @@ if os.path.isdir('upload_files'):
     shutil.rmtree('upload_files')
 os.mkdir('upload_files')
 
-# csvファイル名を入力
+# csvファイル名
 csv_file = input('CSVファイルの名前を入力してください: ') + '.csv'
 
-# 最低価格の割合を入力
-lp = float(input('最低価格の割合を入力してください: '))
+# 発送までの日数
+days = input('発送までの日数を\n1日～2日、3日～6日、7日～13日、14日以降\nから選んでください: ')
 
-# 即決価格の割合を入力
-dp = float(input('即決価格の割合を入力してください: '))
+# アフィリエイト
+af = input('アフィリエイトをはい又はいいえで選んでください: ')
 
-# 送料を入力
+# 開催期間
+op = int(input('開催期間を2−7で入力してください: '))
+
+# 終了時間
+ft = int(input('終了時間を0-23で選んでください: '))
+
+# 送料
 postage = int(input('送料を入力してください: '))
 
-# 開催期間を入力
-op = int(input('開催期間を入力してください: '))
+# 最低価格の割合
+lp = float(input('最低価格の割合を入力してください: '))
+
+# 即決価格の割合
+dp = float(input('即決価格の割合を入力してください: '))
+
 
 # amazonの商品情報リストを開く
 amazon_list = pd.read_csv(csv_file)
@@ -326,8 +336,11 @@ for n in range(len(amazon_list.index)):
 
         result.append(new_templete)
 
-        new_templete['配送方法1全国一律価格'] = postage
+        new_templete['発送までの日数'] = days
+        new_templete['アフィリエイト'] = af
         new_templete['開催期間'] = op
+        new_templete['終了時間'] = ft
+        new_templete['配送方法1全国一律価格'] = postage
     
     except:
         import traceback
