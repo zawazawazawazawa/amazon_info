@@ -298,8 +298,11 @@ for n in range(len(amazon_list.index)):
     try:
         new_templete = copy.deepcopy(templete)
 
-        assert amazon_list.loc[n]['ヤフオクカテゴリ'] == amazon_list.loc[n]['ヤフオクカテゴリ']
-        new_templete['カテゴリ'] = int(amazon_list.loc[n]['ヤフオクカテゴリ'])
+        assert amazon_list.loc[n]['ヤフオクカテゴリID'] == amazon_list.loc[n]['ヤフオクカテゴリID']
+        new_templete['カテゴリID'] = int(amazon_list.loc[n]['ヤフオクカテゴリID'])
+
+        assert amazon_list.loc[n]['ヤフオクカテゴリ名'] == amazon_list.loc[n]['ヤフオクカテゴリ名']
+        new_templete['カテゴリ名'] = amazon_list.loc[n]['ヤフオクカテゴリ名']
 
         assert amazon_list.loc[n]['商品名'] == amazon_list.loc[n]['商品名']
         new_templete['タイトル'] = amazon_list.loc[n]['商品名'][:63] 
@@ -353,8 +356,8 @@ df = pd.DataFrame(result)
 # CSV ファイルとして出力
 df.to_csv("upload_files/data.csv")
 
-fn = input('zipファイルの名前を入力してください:')
+# fn = input('zipファイルの名前を入力してください:')
 
-shutil.make_archive(fn, 'zip', 'upload_files')
+# shutil.make_archive(fn, 'zip', 'upload_files')
 
 print('Finish!')

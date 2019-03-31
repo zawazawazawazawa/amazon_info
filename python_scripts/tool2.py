@@ -58,7 +58,7 @@ while True:
 start_time = datetime.now()
 print('start', start_time.strftime("%Y/%m/%d %H:%M:%S"))
 
-info = {'ASIN': {},'商品名': {}, '商品画像': {}, '商品説明(文章)': {}, '商品説明(画像)': {}, '最低価格': {}, 'Amazonカテゴリ': {}, 'ヤフオクカテゴリ': {}} 
+info = {'ASIN': {},'商品名': {}, '商品画像': {}, '商品説明(文章)': {}, '商品説明(画像)': {}, '最低価格': {}, 'Amazonカテゴリ': {}, 'ヤフオクカテゴリ名': {}, 'ヤフオクカテゴリID': {}} 
 
 # カテゴリのリストを開く
 category_list = pd.read_csv('category_list.csv')
@@ -128,7 +128,7 @@ try:
         a_category = category_tree.rstrip('/')
         print(a_category)
         
-        # ヤフオクカテゴリ
+        # ヤフオクカテゴリID
         large_category = a_category.split('/')[0]
         if category_list[category_list['Amazonカテゴリ名'] == large_category].empty:
             err_msg('ヤフオクカテゴリ')
@@ -166,17 +166,21 @@ try:
         info['Amazonカテゴリ'][ASIN] = a_category
 
         if not category_list[category_list['Amazonカテゴリ名'] == a_category].empty:
-            y_category = category_list[category_list['Amazonカテゴリ名'] == a_category]['ヤフオクカテゴリID'].values[0]
+            y_category_name = category_list[category_list['Amazonカテゴリ名'] == a_category]['ヤフオクカテゴリ名'].values[0]
+            y_category_id   = category_list[category_list['Amazonカテゴリ名'] == a_category]['ヤフオクカテゴリID'].values[0]
         else:
-            y_category = category_list[category_list['Amazonカテゴリ名'] == large_category]['ヤフオクカテゴリID'].values[0]
-        info['ヤフオクカテゴリ'][ASIN] = y_category
+            y_category_name = category_list[category_list['Amazonカテゴリ名'] == large_category]['ヤフオクカテゴリ名'].values[0]
+            y_category_id   = category_list[category_list['Amazonカテゴリ名'] == large_category]['ヤフオクカテゴリID'].values[0]
+        info['ヤフオクカテゴリ名'][ASIN] = y_category_name
+        info['ヤフオクカテゴリID'][ASIN] = y_category_id
 
         print('ASIN: ', ASIN)
         print('商品名: ', info['商品名'][ASIN])
         print('商品説明(文章): ', info['商品説明(文章)'][ASIN])
         print('最低価格: ', info['最低価格'][ASIN])
         print('Amazonカテゴリ: ', info['Amazonカテゴリ'][ASIN])
-        print('ヤフオクカテゴリ: ', info['ヤフオクカテゴリ'][ASIN])
+        print('ヤフオクカテゴリ名: ', info['ヤフオクカテゴリ名'][ASIN])
+        print('ヤフオクカテゴリID: ', info['ヤフオクカテゴリID'][ASIN])
 
         counter += 1
         print(counter)
