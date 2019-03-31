@@ -226,6 +226,6 @@ for n in range(len(df.columns)):
 driver.quit()
 
 # 現在時刻取得、計測終了
-finish_time = datetime.now()
+finish_time = datetime.datetime.now()
 print('finish', finish_time.strftime("%Y/%m/%d %H:%M:%S"))
 print('time', finish_time - start_time)
