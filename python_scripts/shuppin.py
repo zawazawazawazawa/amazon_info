@@ -222,3 +222,10 @@ for n in range(len(df.columns)):
 
     # 下書きに保存
     # driver.find_element_by_css_selector('#auc_preview_draft_up').click()
+
+driver.quit()
+
+# 現在時刻取得、計測終了
+finish_time = datetime.now()
+print('finish', finish_time.strftime("%Y/%m/%d %H:%M:%S"))
+print('time', finish_time - start_time)
