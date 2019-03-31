@@ -68,17 +68,38 @@ driver = webdriver.Chrome(chrome_options=options)
 
 # ブラウザでAmazonにアクセスする
 counter = 0
+RETRIES = 3
+TIMEOUT = 10
+
+# ページの読み込み待ち時間(10秒)
+driver.set_page_load_timeout(TIMEOUT)
 
 try:
     for ASIN in ASIN_list:
-        try:
-            driver.get("https://www.amazon.co.jp/exec/obidos/ASIN/{}".format(ASIN))
-            sleep(2)
-        except TimeoutException:
-            import traceback
-            traceback.print_exc()
-            print('Amazonにアクセスして表示を確認してください\n文字の入力を支持されている場合は指示に従ってください')
-            break
+        i = 0
+        while i < RETRIES:
+            try:
+                driver.get("https://www.amazon.co.jp/exec/obidos/ASIN/{}".format(ASIN))
+                sleep(5)
+
+            except TimeoutException:
+                i = i + 1
+                print("Timeout, Retrying... (%(i)s/%(max)s)" % {'i': i, 'max': RETRIES})
+                continue
+
+            else:
+                break
+        else:
+            msg = "Page was not loaded in time(%(second)s sec)." % {'second': TIMEOUT}
+            raise TimeoutException(msg)
+        # try:
+        #     driver.get("https://www.amazon.co.jp/exec/obidos/ASIN/{}".format(ASIN))
+        #     sleep(2)
+        # except TimeoutException:
+        #     import traceback
+        #     traceback.print_exc()
+        #     print('Amazonにアクセスして表示を確認してください\n文字の入力を支持されている場合は指示に従ってください')
+        #     break
         
         try:
             # validate
@@ -121,12 +142,10 @@ try:
             continue
 
         category_tree = ''
-        print(soup.select('.a-list-item > a'))
         for category in (soup.select('.a-list-item > a')):
             if category.string:
                 category_tree += category.string.strip() + '/'
         a_category = category_tree.rstrip('/')
-        print(a_category)
         
         # ヤフオクカテゴリID
         large_category = a_category.split('/')[0]
